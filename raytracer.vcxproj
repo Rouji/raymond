@@ -101,7 +101,9 @@
     <ClCompile Include="raytracer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="maths.h" />
     <ClInclude Include="PPMWriter.h" />
+    <ClInclude Include="vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
