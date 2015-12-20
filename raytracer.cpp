@@ -3,6 +3,7 @@
 #include "vec3.h"
 #include "mat4.h"
 #include "Sphere.h"
+#include "Camera.h"
 
 using namespace raymond;
 
@@ -10,17 +11,23 @@ int main()
 {
     io::PPMWriter out(500, 500);
 
-    vec3f o(0.0f,0.0f, 0.0f), d(0.0f,0.0f, 1.0f);
+    vec3f eye(0.0f,0.0f, 0.0f), lookat(0.0f,0.0f, 1.0f), up(0.0f,1.0f,0.0f);
     Sphere s;
-    s.setPosition(vec3f(0.0f, 0.0f, 1000.0f));
+    s.setPosition(vec3f(0.0f, 500.0f, 800.0f));
     s.setRadius(250.0f);
+
+    Camera c(eye,
+        lookat,
+        up,
+        500,
+        500);
 
     float inter;
     for (int i = 0; i < 500; i++)
     {
         for (int j = 0; j < 500; j++)
         {
-            if (s.intersect(o + vec3f((float)(i-250), (float)(j - 250), 0.0f), d, &inter))
+            if (s.intersect(c.getRay(i, 500-j), &inter))
                 out.SetPixel(i, j, (unsigned char)inter-750, (unsigned char)inter - 750, (unsigned char)inter - 750);
             else
                 out.SetPixel(i, j, 0, 0, 0);

@@ -97,14 +97,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="PPMWriter.cpp" />
     <ClCompile Include="raytracer.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="mat4.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="PPMWriter.h" />
+    <ClInclude Include="ray3.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="vec3.h" />
