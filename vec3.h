@@ -216,5 +216,8 @@ public:
 	}
 };
 
+//convenient typedef
+typedef vec3<float> vec3f;
+
 } //raymond
 #endif // !__VEC3_H
