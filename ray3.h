@@ -16,25 +16,27 @@ public:
         setDirection(direction);
     }
     
-    const vec3<T>& getOrigin()
+    const vec3<T>& getOrigin() const
     {
         return m_origin;
     }
 
-    const ray3<T>& setOrigin(const vec3<T>& origin)
+    const vec3<T>& setOrigin(const vec3<T>& origin)
     {
         m_origin = origin;
+        return m_origin;
     }
 
-    const vec3<T>& getDirection()
+    const vec3<T>& getDirection() const
     {
         return m_direction;
     }
 
-    const ray3<T>& setDirection(const vec3<T>& direction)
+    const vec3<T>& setDirection(const vec3<T>& direction)
     {
         m_direction = direction;
         m_direction.normalise();
+        return m_direction;
     }
 
     vec3<T> getPointAtDistance(T d)
