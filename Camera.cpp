@@ -3,7 +3,7 @@
 namespace raymond
 {
 
-Camera::Camera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, float fov, unsigned int resX, unsigned int resY)
+Camera::Camera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsigned int resX, unsigned int resY, float fov)
 {
     m_eye = eye;
     float aspect = (float)resY / (float)resY;
