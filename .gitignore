@@ -1,1 +1,8 @@
 *.o
+.vs/
+raytracer.VC.opendb
+raytracer.sdf
+raytracer.vcxproj.filters
+Debug/
+Release/
+Bin/
