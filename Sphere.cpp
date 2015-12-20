@@ -3,6 +3,9 @@
 namespace raymond
 {
 
+
+//ray-sphere intersection test based on a geometric approach
+//TODO: implement a quadratic equation -variant instead?
 bool Sphere::intersect(const vec3f& ray_orig, const vec3f& ray_dir, float* pIntersect)
 {
     float int0, int1;
