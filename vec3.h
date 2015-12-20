@@ -119,6 +119,15 @@ public:
                        X*o.Y - Y*o.X);
 	}
 
+    //returns new vector linearly interpolated between this and the other one
+    //d between 0.0 and 1.0
+    //0.0 = entirely at this vector
+    //1.0 = entirely at the other one
+    vec3<T> interpolate(const vec3<T> o, double d)
+    {
+        return *this + ((o - *this) * d);
+    }
+
 	//operators
 	bool operator==(const vec3<T>& o)
 	{
