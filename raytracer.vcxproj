@@ -99,11 +99,14 @@
   <ItemGroup>
     <ClCompile Include="PPMWriter.cpp" />
     <ClCompile Include="raytracer.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mat4.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="PPMWriter.h" />
+    <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
