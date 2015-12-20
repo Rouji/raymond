@@ -5,6 +5,10 @@
 #define FLOAT_ROUNDING_ERROR_32 0.000001f
 #define FLOAT_ROUNDING_ERROR_64 0.0000001
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif // !PI
+
 namespace raymond
 {
 namespace maths
@@ -27,6 +31,15 @@ inline float squareroot(float n)
 inline double squareroot(double n)
 {
     return sqrt(n);
+}
+
+inline float tangent(float n)
+{
+    return tanf(n);
+}
+inline double tangent(double n)
+{
+    return tan(n);
 }
 
 template <class T>
