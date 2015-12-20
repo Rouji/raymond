@@ -4,7 +4,7 @@ LDFLAGS=
 CFLAGSDEBUG=-c -O -Wall `mysql_config --cflags` -D_DEBUG_
 
 BinName=raymond
-CppFiles=raytracer.cpp
+CppFiles=raytracer.cpp Sphere.cpp PPMWriter.cpp
 OFiles=$(CppFiles:.cpp=.o)
 
 all: $(CppFiles) $(BinName)
