@@ -29,6 +29,12 @@ inline double squareroot(double n)
     return sqrt(n);
 }
 
+template <class T>
+inline T square(const T& n)
+{
+    return n*n;
+}
+
 } //maths
 } //raymond
 #endif // !__MATHS_H
