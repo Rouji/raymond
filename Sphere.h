@@ -10,7 +10,7 @@ namespace raymond
 class Sphere : public SceneObject
 {
 public:
-    bool intersect(const vec3f& ray_orig, const vec3f& ray_dir, float* pIntersect);
+    bool intersect(const ray3f& ray, float* pIntersect);
 
     Sphere& setPosition(const vec3f& p);
     const vec3f& getPosition();

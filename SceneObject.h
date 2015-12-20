@@ -2,6 +2,7 @@
 #define __SCENEOBJECT_H
 
 #include "vec3.h"
+#include "ray3.h"
 
 namespace raymond
 {
@@ -12,7 +13,7 @@ public:
     SceneObject() {};
     ~SceneObject() {};
 
-    virtual bool intersect(const vec3f& ray_orig, const vec3f& ray_dir, float* pIntersect) = 0;
+    virtual bool intersect(const ray3f& ray, float* pIntersect) = 0;
 };
 
 } //raymond

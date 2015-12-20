@@ -6,14 +6,14 @@ namespace raymond
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
-bool Sphere::intersect(const vec3f& ray_orig, const vec3f& ray_dir, float* pIntersect)
+bool Sphere::intersect(const ray3f& ray, float* pIntersect)
 {
     float int0, int1;
     float radiusSquared = maths::square(m_Radius);
 
-    vec3f origToCenter = m_Center - ray_orig;
+    vec3f origToCenter = m_Center - ray.getOrigin();
 
-    float distOrigDotCenter = origToCenter.dot(ray_dir);
+    float distOrigDotCenter = origToCenter.dot(ray.getDirection());
     if (distOrigDotCenter < 0.0f)
         return false;
 
