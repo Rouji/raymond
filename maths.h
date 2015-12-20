@@ -10,26 +10,23 @@ namespace raymond
 namespace maths
 {
 
-
-
-
 //functions for comparing floating point numbers with a given tolerance
 inline bool equals(float a, float b, float tolerance = FLOAT_ROUNDING_ERROR_32)
 {
-	return (a + tolerance >= b) && (a - tolerance <= b);
+    return (a + tolerance >= b) && (a - tolerance <= b);
 }
 inline bool equals(double a, double b, double tolerance = FLOAT_ROUNDING_ERROR_64)
 {
-	return (a + tolerance >= b) && (a - tolerance <= b);
+    return (a + tolerance >= b) && (a - tolerance <= b);
 }
 
 inline float squareroot(float n)
 {
-	return sqrtf(n);
+    return sqrtf(n);
 }
 inline double squareroot(double n)
 {
-	return sqrt(n);
+    return sqrt(n);
 }
 
 } //maths
