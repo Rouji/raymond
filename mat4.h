@@ -136,6 +136,7 @@ inline mat4<T>& mat4<T>::setTranslation(const vec3<T>& t)
     M[3 * 4 + 0] = t.X;
     M[3 * 4 + 1] = t.Y;
     M[3 * 4 + 2] = t.Z;
+    return *this;
 }
 
 template<class T>
@@ -177,9 +178,9 @@ inline vec3<T> mat4<T>::transform(const vec3<T>& v)
 {
     T result[3];
 
-    result[0] = v.X*M[0] + v.X*M[4] + v.X*M[ 8] + M[12];
-    result[1] = v.X*M[1] + v.X*M[5] + v.X*M[ 9] + M[13];
-    result[2] = v.X*M[2] + v.X*M[6] + v.X*M[10] + M[14];
+    result[0] = v.X*M[0] + v.Y*M[4] + v.Z*M[ 8] + M[12];
+    result[1] = v.X*M[1] + v.Y*M[5] + v.Z*M[ 9] + M[13];
+    result[2] = v.X*M[2] + v.Y*M[6] + v.Z*M[10] + M[14];
 
     return vec3<T>(result[0],result[1],result[2]);
 }
@@ -204,7 +205,7 @@ inline bool mat4<T>::operator!=(const mat4<T>& o)
 template<class T>
 inline mat4<T>& mat4<T>::operator=(const mat4<T>& o)
 {
-    memcpy(o.M, M, 16 * sizeof(T));
+    memcpy(M, o.M, 16 * sizeof(T));
     return *this;
 }
 
