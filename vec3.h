@@ -126,7 +126,7 @@ public:
     //d between 0.0 and 1.0
     //0.0 = entirely at this vector
     //1.0 = entirely at the other one
-    vec3<T> interpolate(const vec3<T> o, double d)
+    vec3<T> interpolate(const vec3<T>& o, f64 d)
     {
         return *this + ((o - *this) * d);
     }
