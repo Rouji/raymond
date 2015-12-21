@@ -24,7 +24,7 @@ public:
         Type(LIGHT_AMBIENT),
         Colour(col4f()),
         Position(vec3f(0.0f)),
-        Direction(vec3f(0.0f)),
+        Direction(vec3f(1.0f,0.0f,0.0f)),
         FalloffAlpha1(0.0f),
         FalloffAlpha2(0.0f)
     {}

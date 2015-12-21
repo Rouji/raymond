@@ -21,6 +21,8 @@ public:
     void addSceneObject(CSceneObject* pObj);
     void addLight(CLight* pLight);
 
+    void setCamera(CCamera* pCam);
+
     void setClearColour(const col4f& col);
 
     void setImagePath(const s8* path);
@@ -33,7 +35,7 @@ public:
 private:
     std::list<CSceneObject*> m_objectList;
     std::list<CLight*> m_lightList;
-    CCamera m_camera;
+    CCamera* m_pCamera;
     col4f m_clearCol;
     const s8* m_imagePath;
 };
