@@ -7,10 +7,10 @@
 namespace raymond
 {
 
-class Sphere : public SceneObject
+class Sphere : protected SceneObject
 {
 public:
-    bool intersect(const ray3f& ray, float* pIntersect);
+    bool intersect(const ray3f& ray, Intersection* pIntersect);
 
     Sphere& setPosition(const vec3f& p);
     const vec3f& getPosition();

@@ -6,7 +6,7 @@ namespace raymond
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
-bool Sphere::intersect(const ray3f& ray, float* pIntersect)
+bool Sphere::intersect(const ray3f& ray, Intersection* pIntersect)
 {
     float int0, int1;
     float radiusSquared = maths::square(m_Radius);
@@ -25,7 +25,14 @@ bool Sphere::intersect(const ray3f& ray, float* pIntersect)
     int0 = distOrigDotCenter - distIntDotCenter;
     int1 = distOrigDotCenter + distIntDotCenter;
 
-    *pIntersect = (int0 < int1 && int0 > 0.0f) ? int0 : int1;
+    //pick the nearest, non-negative
+    float intersectionDist = (int0 < int1 && int0 > 0.0f) ? int0 : int1; 
+    if (intersectionDist < 0.0f) //both negative -> no valid result
+        return false;
+
+
+    pIntersect->Inter = intersectionDist;
+    pIntersect->Normal = (ray.getPointAtDistance(intersectionDist) - m_Center).normalise();
 
     return true;
 }

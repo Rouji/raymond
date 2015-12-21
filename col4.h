@@ -9,7 +9,7 @@ template <class T>
 class col4
 {
 public:
-    col4(T r, T g, T b, T a = 0) :
+    col4(T r = 0, T g = 0, T b = 0, T a = 0) :
         R(r), G(g), B(b), A(a)
     {}
 
