@@ -1,17 +1,13 @@
-#ifndef __MATERIAL_H
-#define __MATERIAL_H
+#ifndef __SMATERIAL_H
+#define __SMATERIAL_H
 
 #include "col4.h"
 
 namespace raymond
 {
 
-class Material
+struct SMaterial
 {
-public:
-    Material() {}
-    ~Material() {}
-
     //TODO: texture (file path? pointer to some cache in memory?)
     col4f Colour;
     float ka; //phong ambient component
@@ -25,4 +21,4 @@ public:
 
 } //raymond
 
-#endif // !__MATERIAL_H
+#endif // !__SMATERIAL_H

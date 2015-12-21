@@ -1,16 +1,16 @@
-#ifndef __SPHERE_H
-#define __SPHERE_H
+#ifndef __CSPHERE_H
+#define __CSPHERE_H
 
 #include "vec3.h"
-#include "SceneObject.h"
+#include "CSceneObject.h"
 
 namespace raymond
 {
 
-class Sphere : protected SceneObject
+class Sphere : protected CSceneObject
 {
 public:
-    bool intersect(const ray3f& ray, Intersection* pIntersect);
+    bool intersect(const ray3f& ray, SIntersection* pIntersect);
 
     Sphere& setPosition(const vec3f& p);
     const vec3f& getPosition();
@@ -25,5 +25,5 @@ private:
 
 } //raymond
 
-#endif // !__SPHERE_H
+#endif // !__CSPHERE_H
 

@@ -1,5 +1,5 @@
-#ifndef __LIGHT_H
-#define __LIGHT_H
+#ifndef __CLIGHT_H
+#define __CLIGHT_H
 
 #include "col4.h"
 #include "vec3.h"
@@ -7,7 +7,7 @@
 namespace raymond
 {
 
-class Light
+class CLight
 {
 public:
     enum LightType
@@ -18,7 +18,7 @@ public:
         LIGHT_SPOT
     };
 
-    Light() : 
+    CLight() : 
         Type(LIGHT_AMBIENT),
         Colour(col4f()),
         Position(vec3f(0.0f)),
@@ -27,7 +27,7 @@ public:
         FalloffAlpha2(0.0f)
     {}
 
-    ~Light(){}
+    ~CLight(){}
 
     LightType Type;
     col4f Colour;
@@ -39,5 +39,5 @@ public:
 
 }
 
-#endif // !__LIGHT_H
+#endif // !__CLIGHT_H
 

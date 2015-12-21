@@ -1,4 +1,4 @@
-#include "PPMWriter.h"
+#include "CPPMImageWriter.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,25 +9,25 @@ namespace raymond
 namespace io
 {
 
-PPMWriter::PPMWriter() : 
+CPPMImageWriter::CPPMImageWriter() : 
     m_pData(0),
     m_uWidth(0),
     m_uHeight(0)
 {}
 
-PPMWriter::PPMWriter(unsigned int width, unsigned int height) : 
+CPPMImageWriter::CPPMImageWriter(unsigned int width, unsigned int height) : 
     m_pData(0)
 {
     Alloc(width, height);
 }
 
-PPMWriter::~PPMWriter()
+CPPMImageWriter::~CPPMImageWriter()
 {
     if (m_pData)
         delete[] m_pData;
 }
 
-void PPMWriter::Alloc(unsigned int width, unsigned int height)
+void CPPMImageWriter::Alloc(unsigned int width, unsigned int height)
 {
     if (m_pData)
         delete[] m_pData;
@@ -37,7 +37,7 @@ void PPMWriter::Alloc(unsigned int width, unsigned int height)
     m_pData = new unsigned char[width*height*3];
 }
 
-unsigned int PPMWriter::SetPixel(unsigned int x, unsigned int y, unsigned char r, unsigned char g, unsigned char b)
+unsigned int CPPMImageWriter::SetPixel(unsigned int x, unsigned int y, unsigned char r, unsigned char g, unsigned char b)
 {
     if (!m_pData || x > m_uWidth || y > m_uHeight)
         return 1;
@@ -50,7 +50,7 @@ unsigned int PPMWriter::SetPixel(unsigned int x, unsigned int y, unsigned char r
     return 0;
 }
 
-unsigned int PPMWriter::Write(const char* path)
+unsigned int CPPMImageWriter::Write(const char* path)
 {
     if (!m_pData)
         return 1;

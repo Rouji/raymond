@@ -1,4 +1,4 @@
-#include "Sphere.h"
+#include "CSphere.h"
 
 namespace raymond
 {
@@ -6,7 +6,7 @@ namespace raymond
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
-bool Sphere::intersect(const ray3f& ray, Intersection* pIntersect)
+bool Sphere::intersect(const ray3f& ray, SIntersection* pIntersect)
 {
     float int0, int1;
     float radiusSquared = maths::square(m_Radius);

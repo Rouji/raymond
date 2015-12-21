@@ -1,9 +1,9 @@
-#include "Camera.h"
+#include "CCamera.h"
 
 namespace raymond
 {
 
-Camera::Camera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsigned int resX, unsigned int resY, float fov)
+CCamera::CCamera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsigned int resX, unsigned int resY, float fov)
 {
     m_eye = eye;
     float aspect = (float)resY / (float)resX;
@@ -21,7 +21,7 @@ Camera::Camera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsign
     m_vecPerPixelY = (v*viewPlaneH * 2) / resY;
 }
 
-ray3f Camera::getRay(unsigned int pixelX, unsigned int pixelY)
+ray3f CCamera::getRay(unsigned int pixelX, unsigned int pixelY)
 {
     return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pixelX) + (m_vecPerPixelY * pixelY));
 }

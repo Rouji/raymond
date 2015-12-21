@@ -1,5 +1,5 @@
-#ifndef __PPMWRITER_H
-#define __PPMWRITER_H
+#ifndef __CPPMIMAGEWRITER_H
+#define __CPPMIMAGEWRITER_H
 
 
 namespace raymond
@@ -7,12 +7,12 @@ namespace raymond
 namespace io
 {
 
-class PPMWriter
+class CPPMImageWriter
 {
 public:
-    PPMWriter();
-    PPMWriter(unsigned int width, unsigned int height);
-    ~PPMWriter();
+    CPPMImageWriter();
+    CPPMImageWriter(unsigned int width, unsigned int height);
+    ~CPPMImageWriter();
 
 	//allocates a block of memory for width*heigth pixels
     //call first before doing anything else
@@ -30,4 +30,4 @@ private:
 }//io
 }//raymond
 
-#endif // !__PPMWRITER_H
+#endif // !__CPPMIMAGEWRITER_H
