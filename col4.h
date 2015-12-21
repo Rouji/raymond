@@ -41,6 +41,7 @@ public:
         G = o.G;
         B = o.B;
         A = o.A;
+        return *this;
     }
 
     col4<T> operator+(const col4<T>& o)
