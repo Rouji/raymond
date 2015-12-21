@@ -9,25 +9,26 @@ using namespace raymond;
 
 int main()
 {
-    io::PPMWriter out(500, 500);
+
+    io::PPMWriter out(500, 400);
 
     vec3f eye(0.0f,0.0f, 0.0f), lookat(0.0f,0.0f, 1.0f), up(0.0f,1.0f,0.0f);
     Sphere s;
-    s.setPosition(vec3f(0.0f, 500.0f, 800.0f));
+    s.setPosition(vec3f(0.0f, 0.0f, 800.0f));
     s.setRadius(250.0f);
 
     Camera c(eye,
         lookat,
         up,
         500,
-        500);
+        400);
 
     float inter;
     for (int i = 0; i < 500; i++)
     {
-        for (int j = 0; j < 500; j++)
+        for (int j = 0; j < 400; j++)
         {
-            if (s.intersect(c.getRay(i, 500-j), &inter))
+            if (s.intersect(c.getRay(i, 400-j), &inter))
                 out.SetPixel(i, j, (unsigned char)inter-750, (unsigned char)inter - 750, (unsigned char)inter - 750);
             else
                 out.SetPixel(i, j, 0, 0, 0);
