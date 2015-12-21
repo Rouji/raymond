@@ -3,6 +3,7 @@
 
 #include "maths.h"
 #include "types.h"
+#include "vec3.h"
 
 namespace raymond
 {
@@ -13,6 +14,8 @@ template <class T>
 class col4
 {
 public:
+    T R; T G; T B; T A;
+
     col4(T r = 0, T g = 0, T b = 0, T a = 0) :
         R(r), G(g), B(b), A(a)
     {}
@@ -25,12 +28,21 @@ public:
         A = o.A;
     }
 
-    col4<T> clamp(const T& min, const T& max)
+    col4(const vec3<T>& o)
     {
-        return col4<T>(maths::clamp(R, min, max),
-                       maths::clamp(G, min, max),
-                       maths::clamp(B, min, max),
-                       maths::clamp(A, min, max));
+        R = o.X;
+        G = o.Y;
+        B = o.Z;
+        A = 0;
+    }
+
+    col4<T>& clamp(const T& min, const T& max)
+    {
+        R = maths::clamp(R, min, max);
+        G = maths::clamp(G, min, max);
+        B = maths::clamp(B, min, max);
+        A = maths::clamp(A, min, max);
+        return *this;
     }
 
     bool operator==(const col4<T>& o)
@@ -69,7 +81,7 @@ public:
         return *this;
     }
 
-    col4<T> operator-(const col4<T>& o)
+    col4<T> operator-(const col4<T>& o) const
     {
         return col4<T>(R - o.R, G - o.G, B - o.B, A - o.A);
     }
@@ -83,7 +95,7 @@ public:
         return *this;
     }
 
-    col4<T> operator*(const col4<T>& o)
+    col4<T> operator*(const col4<T>& o) const
     {
         return col4<T>(R * o.R, G * o.G, B * o.B, A * o.A);
     }
@@ -97,7 +109,21 @@ public:
         return *this;
     }
 
-    col4<T> operator/(const col4<T>& o)
+    col4<T> operator*(const T& n) const
+    {
+        return col4<T>(R * n, G * n, B * n, A * n);
+    }
+
+    col4<T>& operator*=(const T& n)
+    {
+        R *= n;
+        G *= n;
+        B *= n;
+        A *= n;
+        return *this;
+    }
+
+    col4<T> operator/(const col4<T>& o) const
     {
         return col4<T>(R / o.R, G / o.G, B / o.B, A / o.A);
     }
@@ -111,10 +137,20 @@ public:
         return *this;
     }
 
-    T R;
-    T G;
-    T B;
-    T A;
+    col4<T> operator/(const T& n) const
+    {
+        if (maths::equals(n, n)) return *this;
+        return col4<T>(R / n, G / n, B / n, A / n);
+    }
+
+    col4<T>& operator/=(const T& n)
+    {
+        if (!equals(R, 0)) R /= n;
+        if (!equals(G, 0)) G /= n;
+        if (!equals(B, 0)) B /= n;
+        if (!equals(A, 0)) A /= n;
+        return *this;
+    }
 };
 
 typedef col4<f32> col4f;

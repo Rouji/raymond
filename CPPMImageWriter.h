@@ -2,6 +2,8 @@
 #define __CPPMIMAGEWRITER_H
 
 #include "types.h"
+#include "vec2.h"
+#include "col4.h"
 
 namespace raymond
 {
@@ -12,20 +14,19 @@ class CPPMImageWriter
 {
 public:
     CPPMImageWriter();
-    CPPMImageWriter(u32 width, u32 height);
+    CPPMImageWriter(const dim2i& size);
     ~CPPMImageWriter();
 
 	//allocates a block of memory for width*heigth pixels
     //call first before doing anything else
-    void Alloc(u32 width, u32 height);
+    void Alloc(const dim2i& size);
 
-    u32 SetPixel(u32 x, u32 y, u8 r, u8 g, u8 b);
+    u32 SetPixel(const vec2i& pos, const col4f& col);
     u32 Write(const char* path);
 
 private:
     u8* m_pData;
-    u32 m_uWidth;
-    u32 m_uHeight;
+    dim2i m_size;
 };
 
 }//io

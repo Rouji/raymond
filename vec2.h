@@ -14,7 +14,7 @@ namespace raymond
         T X; T Y; //x,y components
 
                        //constructors
-        vec2() : X(0), Y(0), Z(0) {} //default to all 0
+        vec2() : X(0), Y(0) {} //default to all 0
         vec2(T x, T y) : X(x), Y(y) {}
         vec2(T n) : X(n), Y(n) {} //set all components to same value
 

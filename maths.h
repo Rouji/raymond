@@ -54,11 +54,21 @@ inline T square(const T& n)
 }
 
 template <class T>
-inline T clamp(const T& n, const T& max, const T& min)
+inline T min(const T& a, const T& b)
 {
-    if (n < min) return min;
-    if (n > max) return max;
-    return n;
+    return a < b ? a : b;
+}
+
+template <class T>
+inline T max(const T& a, const T& b)
+{
+    return a > b ? a : b;
+}
+
+template <class T>
+inline T clamp(const T& n, const T& low, const T& high)
+{
+    return min(max(low, n), high);
 }
 
 } //maths
