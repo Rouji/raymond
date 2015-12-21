@@ -14,6 +14,9 @@ namespace raymond
 namespace maths
 {
 
+//TODO: provide generic templated functions for all these, 
+//instead of only specific implementations
+
 //functions for comparing floating point numbers with a given tolerance
 inline bool equals(float a, float b, float tolerance = FLOAT_ROUNDING_ERROR_32)
 {
@@ -46,6 +49,14 @@ template <class T>
 inline T square(const T& n)
 {
     return n*n;
+}
+
+template <class T>
+inline T clamp(const T& n, const T& max, const T& min)
+{
+    if (n < min) return min;
+    if (n > max) return max;
+    return n;
 }
 
 } //maths

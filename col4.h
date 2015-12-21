@@ -1,8 +1,11 @@
 #ifndef __COLOUR_H
 #define __COLOUR_H
 
+#include "maths.h"
+
 namespace raymond
 {
+
 
 //4 component (RGB+A) colour class
 template <class T>
@@ -21,6 +24,13 @@ public:
         A = o.A;
     }
 
+    col4<T> clamp(const T& min, const T& max)
+    {
+        return col4<T>(maths::clamp(R, min, max),
+                       maths::clamp(G, min, max),
+                       maths::clamp(B, min, max),
+                       maths::clamp(A, min, max));
+    }
 
     bool operator==(const col4<T>& o)
     {
