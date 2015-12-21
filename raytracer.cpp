@@ -1,20 +1,26 @@
-#include "CPPMImageWriter.h"
-
-#include "vec3.h"
-#include "mat4.h"
-#include "CSphere.h"
-#include "CCamera.h"
 #include "CSceneLoader.h"
+#include "Log.h"
 
 using namespace raymond;
 
-int main()
+int main(int argc, char** argv)
 {
-    //TODO: cmd parsing
+    if (argc < 2)
+    {
+        io::LogError("You need to pass a valid XML file, e.g.:\n%s scenes/example2.xml\n", argv[0]);
+        return 0;
+    }
+
     scene::CSceneLoader loader;
     scene::CScene* pScene = loader.loadXML("scenes/example2.xml");
-    pScene->render();
+    
+    if (pScene)
+    {
+        pScene->render();
+        delete pScene;
+        return 0;
+	}
 
-    delete pScene;
-	return 0;
+    io::LogError("Rendering the scene failed\n");
+    return 1;
 }

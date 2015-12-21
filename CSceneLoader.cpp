@@ -1,11 +1,15 @@
 #include "CSceneLoader.h"
+#include "Log.h"
 
-using namespace tinyxml2;
+
 
 namespace raymond
 {
 namespace scene
 {
+
+using namespace tinyxml2;
+using namespace io;
 
 CSceneLoader::CSceneLoader()
 {
@@ -23,7 +27,7 @@ CScene* CSceneLoader::loadXML(const char* path)
     XMLDocument doc;
     if (doc.LoadFile((const char*)path) != tinyxml2::XML_NO_ERROR)
     {
-        //TODO: "error loading file"
+        LogError("Couldn't load file \"%s\"\n",path);
         return 0;
     }
 
