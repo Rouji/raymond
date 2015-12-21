@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <new>
 
+namespace raymond
+{
+namespace io
+{
+
 PPMWriter::PPMWriter() : 
     m_pData(0),
     m_uWidth(0),
@@ -74,3 +79,7 @@ unsigned int PPMWriter::Write(const char* path)
 
     return 0;
 }
+
+
+} //io
+} //raymond

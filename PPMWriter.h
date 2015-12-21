@@ -1,3 +1,12 @@
+#ifndef __PPMWRITER_H
+#define __PPMWRITER_H
+
+
+namespace raymond
+{
+namespace io
+{
+
 class PPMWriter
 {
 public:
@@ -17,3 +26,8 @@ private:
     unsigned int m_uWidth;
     unsigned int m_uHeight;
 };
+
+}//io
+}//raymond
+
+#endif // !__PPMWRITER_H
