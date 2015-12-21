@@ -20,7 +20,7 @@ public:
 
 private:
     vec3f m_Center;
-    float m_Radius;
+    f32 m_Radius;
 };
 
 } //raymond

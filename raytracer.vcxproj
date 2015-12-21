@@ -97,21 +97,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="PPMWriter.cpp" />
+    <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CPPMImageWriter.cpp" />
     <ClCompile Include="raytracer.cpp" />
-    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="CSphere.cpp" />
+    <ClCompile Include="tinyxml2\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="col4.h" />
+    <ClInclude Include="CLight.h" />
     <ClInclude Include="mat4.h" />
-    <ClInclude Include="Material.h" />
+    <ClInclude Include="SMaterial.h" />
     <ClInclude Include="maths.h" />
-    <ClInclude Include="PPMWriter.h" />
+    <ClInclude Include="CPPMImageWriter.h" />
     <ClInclude Include="ray3.h" />
-    <ClInclude Include="SceneObject.h" />
-    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSceneObject.h" />
+    <ClInclude Include="CSphere.h" />
+    <ClInclude Include="tinyxml2\tinyxml2.h" />
+    <ClInclude Include="types.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

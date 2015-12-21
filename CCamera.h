@@ -13,7 +13,12 @@ class CCamera
 {
 public:
     //fov assumed to be horizontal
-    CCamera(const vec3f& eye = vec3f(0), const vec3f& lookAt = vec3f(1.0f, 0, 0), const vec3f& up = vec3f(0, 1.0f, 0), unsigned int resX = 512, unsigned int resY = 512, float fov = PI / 2.0f);
+    CCamera(const vec3f& eye = vec3f(0), 
+            const vec3f& lookAt = vec3f(1.0f, 0, 0), 
+            const vec3f& up = vec3f(0, 1.0f, 0), 
+            u32 resX = 512, 
+            u32 resY = 512, 
+            f32 fov = PI / 2.0f);
 
     //return a ray for a given screen pixel
     ray3f getRay(unsigned int pixelX, unsigned int pixelY);

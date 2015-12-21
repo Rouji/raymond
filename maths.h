@@ -2,6 +2,8 @@
 #define __MATHS_H
 #include <math.h>
 
+#include "types.h"
+
 #define FLOAT_ROUNDING_ERROR_32 0.000001f
 #define FLOAT_ROUNDING_ERROR_64 0.0000001
 
@@ -18,29 +20,29 @@ namespace maths
 //instead of only specific implementations
 
 //functions for comparing floating point numbers with a given tolerance
-inline bool equals(float a, float b, float tolerance = FLOAT_ROUNDING_ERROR_32)
+inline bool equals(f32 a, f32 b, f32 tolerance = FLOAT_ROUNDING_ERROR_32)
 {
     return (a + tolerance >= b) && (a - tolerance <= b);
 }
-inline bool equals(double a, double b, double tolerance = FLOAT_ROUNDING_ERROR_64)
+inline bool equals(f64 a, f64 b, f64 tolerance = FLOAT_ROUNDING_ERROR_64)
 {
     return (a + tolerance >= b) && (a - tolerance <= b);
 }
 
-inline float squareroot(float n)
+inline float squareroot(f32 n)
 {
     return sqrtf(n);
 }
-inline double squareroot(double n)
+inline double squareroot(f64 n)
 {
     return sqrt(n);
 }
 
-inline float tangent(float n)
+inline float tangent(f32 n)
 {
     return tanf(n);
 }
-inline double tangent(double n)
+inline double tangent(f64 n)
 {
     return tan(n);
 }

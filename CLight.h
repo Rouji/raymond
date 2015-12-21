@@ -33,8 +33,8 @@ public:
     col4f Colour;
     vec3f Position;
     vec3f Direction;
-    float FalloffAlpha1;
-    float FalloffAlpha2;
+    f32 FalloffAlpha1;
+    f32 FalloffAlpha2;
 };
 
 }

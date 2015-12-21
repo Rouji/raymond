@@ -2,6 +2,7 @@
 #define __COLOUR_H
 
 #include "maths.h"
+#include "types.h"
 
 namespace raymond
 {
@@ -116,7 +117,7 @@ public:
     T A;
 };
 
-typedef col4<float> col4f;
+typedef col4<f32> col4f;
 
 }
 

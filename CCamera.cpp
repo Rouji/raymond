@@ -3,17 +3,22 @@
 namespace raymond
 {
 
-CCamera::CCamera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsigned int resX, unsigned int resY, float fov)
+CCamera::CCamera(const vec3f & eye, 
+                 const vec3f & lookAt, 
+                 const vec3f & up, 
+                 u32 resX, 
+                 u32 resY, 
+                 f32 fov)
 {
     m_eye = eye;
-    float aspect = (float)resY / (float)resX;
+    f32 aspect = (f32)resY / (f32)resX;
     vec3f viewDir = lookAt - eye;
     vec3f u = viewDir.cross(up).normalise();
     vec3f v = u.cross(viewDir).normalise();
 
     //actually half of the viewplane width/heigth
-    float viewPlaneW = maths::tangent(fov / 2.0f);
-    float viewPlaneH = viewPlaneW*aspect;
+    f32 viewPlaneW = maths::tangent(fov / 2.0f);
+    f32 viewPlaneH = viewPlaneW*aspect;
 
     m_viewPlaneCorner = lookAt - (u*viewPlaneW) - (v*viewPlaneH);
 
@@ -21,7 +26,7 @@ CCamera::CCamera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsi
     m_vecPerPixelY = (v*viewPlaneH * 2) / resY;
 }
 
-ray3f CCamera::getRay(unsigned int pixelX, unsigned int pixelY)
+ray3f CCamera::getRay(u32 pixelX, u32 pixelY)
 {
     return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pixelX) + (m_vecPerPixelY * pixelY));
 }

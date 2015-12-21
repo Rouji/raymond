@@ -1,6 +1,7 @@
 #ifndef __VEC3_H
 #define __VEC3_H
 
+#include "types.h"
 #include "maths.h"
 
 namespace raymond
@@ -228,7 +229,7 @@ public:
 };
 
 //convenient typedef
-typedef vec3<float> vec3f;
+typedef vec3<f32> vec3f;
 
 } //raymond
 #endif // !__VEC3_H

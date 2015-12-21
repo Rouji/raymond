@@ -1,6 +1,7 @@
 #ifndef __CPPMIMAGEWRITER_H
 #define __CPPMIMAGEWRITER_H
 
+#include "types.h"
 
 namespace raymond
 {
@@ -11,20 +12,20 @@ class CPPMImageWriter
 {
 public:
     CPPMImageWriter();
-    CPPMImageWriter(unsigned int width, unsigned int height);
+    CPPMImageWriter(u32 width, u32 height);
     ~CPPMImageWriter();
 
 	//allocates a block of memory for width*heigth pixels
     //call first before doing anything else
-    void Alloc(unsigned int width, unsigned int height);
+    void Alloc(u32 width, u32 height);
 
-    unsigned int SetPixel(unsigned int x, unsigned int y, unsigned char r, unsigned char g, unsigned char b);
-    unsigned int Write(const char* path);
+    u32 SetPixel(u32 x, u32 y, u8 r, u8 g, u8 b);
+    u32 Write(const char* path);
 
 private:
-    unsigned char* m_pData;
-    unsigned int m_uWidth;
-    unsigned int m_uHeight;
+    u8* m_pData;
+    u32 m_uWidth;
+    u32 m_uHeight;
 };
 
 }//io

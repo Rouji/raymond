@@ -2,6 +2,7 @@
 #define __RAY3_H
 
 #include "vec3.h"
+#include "types.h"
 
 namespace raymond
 {
@@ -51,7 +52,7 @@ private:
     //T m_far;
 };
 
-typedef ray3<float> ray3f;
+typedef ray3<f32> ray3f;
 
 }
 

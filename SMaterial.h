@@ -10,13 +10,13 @@ struct SMaterial
 {
     //TODO: texture (file path? pointer to some cache in memory?)
     col4f Colour;
-    float ka; //phong ambient component
-    float kd; //phong diffuse component
-    float ks; //phong specular component
-    float exp; //phong cosine power for highlights
-    float Reflectance;
-    float Transmittance; 
-    float Refraction; //index of refraction
+    f32 ka; //phong ambient component
+    f32 kd; //phong diffuse component
+    f32 ks; //phong specular component
+    f32 exp; //phong cosine power for highlights
+    f32 Reflectance;
+    f32 Transmittance; 
+    f32 Refraction; //index of refraction
 };
 
 } //raymond

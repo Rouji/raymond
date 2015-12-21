@@ -3,6 +3,7 @@
 
 #include "maths.h"
 #include "vec3.h"
+#include "types.h"
 
 #include <string.h> //for memset etc.
 
@@ -305,7 +306,7 @@ inline T & mat4<T>::operator()(int row, int col)
 }
 
 
-typedef mat4<float> mat4f;
+typedef mat4<f32> mat4f;
 
 }//raymond
 #endif // !__MAT4_H
