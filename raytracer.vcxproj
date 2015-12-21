@@ -104,7 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="col4.h" />
     <ClInclude Include="mat4.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="PPMWriter.h" />
     <ClInclude Include="ray3.h" />

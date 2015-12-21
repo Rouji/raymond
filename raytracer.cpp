@@ -9,7 +9,6 @@ using namespace raymond;
 
 int main()
 {
-
     io::PPMWriter out(500, 400);
 
     vec3f eye(0.0f,0.0f, 0.0f), lookat(0.0f,0.0f, 1.0f), up(0.0f,1.0f,0.0f);
@@ -23,13 +22,15 @@ int main()
         500,
         400);
 
-    float inter;
+    Intersection inter;
     for (int i = 0; i < 500; i++)
     {
         for (int j = 0; j < 400; j++)
         {
-            if (s.intersect(c.getRay(i, 400-j), &inter))
-                out.SetPixel(i, j, (unsigned char)inter-750, (unsigned char)inter - 750, (unsigned char)inter - 750);
+            if (s.intersect(c.getRay(i, 400 - j), &inter))
+            {
+                out.SetPixel(i, j, (inter.Normal.X + 1.0f) * 125, (inter.Normal.Y + 1.0f) * 125, (inter.Normal.Z + 1.0f) * 125);
+            }
             else
                 out.SetPixel(i, j, 0, 0, 0);
         }
