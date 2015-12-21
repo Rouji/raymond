@@ -223,7 +223,7 @@ public:
     {
         X /= n;
         Y /= n;
-        Y /= n;
+        Z /= n;
         return *this;
     }
 };
