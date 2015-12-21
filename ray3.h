@@ -39,7 +39,7 @@ public:
         return m_direction;
     }
 
-    vec3<T> getPointAtDistance(T d)
+    vec3<T> getPointAtDistance(T d) const
     {
         return m_origin + (m_direction*d);
     }
