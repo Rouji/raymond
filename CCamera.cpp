@@ -25,7 +25,10 @@ ray3f CCamera::getRay(const vec2i& pos)
     if (m_dirty)
         computePlane();
 
-    return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pos.X) + (m_vecPerPixelY * (m_imageSize.Y - pos.Y)));
+    vec3f planeCoord = (m_vecPerPixelX * pos.X) + (m_vecPerPixelY * (m_imageSize.Y - pos.Y));
+    vec3f worldCoord = m_viewPlaneCorner + planeCoord;
+    vec3f dir = worldCoord - m_eye;
+    return ray3f(m_eye, dir);
 }
 
 void CCamera::setEyePoint(const vec3f & eye)
@@ -97,7 +100,7 @@ u32 CCamera::getMaxBounces() const
 void CCamera::computePlane()
 {
     f32 aspect = (f32)m_imageSize.Y / (f32)m_imageSize.X;
-    vec3f viewDir = m_lookAt - m_eye;
+    vec3f viewDir = (m_lookAt - m_eye).normalise();
     vec3f u = viewDir.cross(m_up).normalise();
     vec3f v = u.cross(viewDir).normalise();
 
@@ -105,7 +108,8 @@ void CCamera::computePlane()
     f32 viewPlaneW = maths::tangent(m_fov / 2.0f);
     f32 viewPlaneH = viewPlaneW*aspect;
 
-    m_viewPlaneCorner = m_lookAt - (u*viewPlaneW) - (v*viewPlaneH);
+    //m_viewPlaneCorner = m_lookAt - (u*viewPlaneW) - (v*viewPlaneH);
+    m_viewPlaneCorner = (m_eye + viewDir) - (u*viewPlaneW) - (v*viewPlaneH);
 
     m_vecPerPixelX = (u*viewPlaneW * 2) / m_imageSize.X;
     m_vecPerPixelY = (v*viewPlaneH * 2) / m_imageSize.Y;
