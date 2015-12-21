@@ -25,7 +25,7 @@ public:
 
     void setClearColour(const col4f& col);
 
-    void setImagePath(const s8* path);
+    void setImagePath(const char* path);
 
     u32 render();
 
@@ -33,11 +33,14 @@ public:
     void clear();
 
 private:
+    //recursive ray-trace function
+    col4f trace(const ray3f& ray, u32 depth = 0);
+
     std::list<CSceneObject*> m_objectList;
     std::list<CLight*> m_lightList;
     CCamera* m_pCamera;
     col4f m_clearCol;
-    const s8* m_imagePath;
+    char m_imagePath[512];
 };
 
 } //scene

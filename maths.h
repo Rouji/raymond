@@ -4,12 +4,14 @@
 
 #include "types.h"
 
-#define FLOAT_ROUNDING_ERROR_32 0.000001f
-#define FLOAT_ROUNDING_ERROR_64 0.0000001
+const f32 FLOAT_ROUNDING_ERROR_32 = 0.000001f;
+const f64 FLOAT_ROUNDING_ERROR_64 = 0.0000001;
 
 #ifndef PI
-#define PI 3.14159265359f
+const f32 PI = 3.14159265359f;
 #endif // !PI
+
+const f32 DEG_TO_RAD = PI / 180.0f;
 
 namespace raymond
 {

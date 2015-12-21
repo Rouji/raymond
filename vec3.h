@@ -103,7 +103,7 @@ public:
     }
 
     //squared distance to another vector
-    T distanceSquared(const vec3<T>& o)
+    T distanceSquared(const vec3<T>& o) const
     {
         return (*this - o).lengthSquared();
     }

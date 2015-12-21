@@ -11,10 +11,16 @@ template <class T>
 class ray3
 {
 public:
-    ray3(const vec3<T>& origin, const vec3<T>& direction)
+    ray3(const vec3<T>& origin = vec3<T>(0), const vec3<T>& direction = vec3<T>(0))
     {
         setOrigin(origin);
         setDirection(direction);
+    }
+
+    ray3(const ray3<T>& o)
+    {
+        m_origin = o.m_origin;
+        m_direction = o.m_direction;
     }
     
     const vec3<T>& getOrigin() const
@@ -43,6 +49,13 @@ public:
     vec3<T> getPointAtDistance(T d) const
     {
         return m_origin + (m_direction*d);
+    }
+
+    ray3<T>& operator=(const ray3<T>& o)
+    {
+        m_origin = o.m_origin;
+        m_direction = o.m_direction;
+        return *this;
     }
 
 private:

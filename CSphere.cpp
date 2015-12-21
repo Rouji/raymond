@@ -37,7 +37,7 @@ bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
 
     //offset the intersection point slightly from the sphere to avoid rounding errors
     //putting us inside the sphere
-    pIntersect->IntersectionPoint += pIntersect->Normal * FLOAT_ROUNDING_ERROR_32; 
+    pIntersect->IntersectionPoint += pIntersect->Normal * FLOAT_ROUNDING_ERROR_32; //TODO: tweak?
 
     return true;
 }

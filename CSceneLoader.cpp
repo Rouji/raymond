@@ -42,7 +42,7 @@ CScene* CSceneLoader::loadXML(const char* path)
         return 0;
     }
 
-    const s8* output_file = (const s8*)pSceneElement->Attribute("output_file");
+    const char* output_file = pSceneElement->Attribute("output_file");
     if (!output_file)
     {
         //TODO: "no output file specified"
@@ -50,6 +50,8 @@ CScene* CSceneLoader::loadXML(const char* path)
     }
 
     CScene* pNewScene = new CScene();
+
+    pNewScene->setImagePath(output_file);
 
     //load background colour
     if (pChild = pSceneElement->FirstChildElement("background_color"))
@@ -126,7 +128,8 @@ CCamera* CSceneLoader::xmlElemToCamera(tinyxml2::XMLElement* pElem)
     CCamera* pNewCam = new CCamera(xmlElemToVec(pPosElem),
                                    xmlElemToVec(pLookAtElem),
                                    xmlElemToVec(pUpElem));
-    if (pFOVElem) pNewCam->setFOV(xmlElemGetFloatAttrib(pFOVElem, "angle"));
+    if (pFOVElem) pNewCam->setFOV(2*DEG_TO_RAD * xmlElemGetFloatAttrib(pFOVElem, "angle"));
+    if (pLookAtElem) pNewCam->setLookAtPoint(xmlElemToVec(pLookAtElem));
     if (pResElem) pNewCam->setImageSize(dim2i(xmlElemGetIntAttrib(pResElem, "horizontal"), xmlElemGetIntAttrib(pResElem, "vertical")));
     if (pBouncesElem) pNewCam->setMaxBounces(xmlElemGetIntAttrib(pBouncesElem, "n"));
     
