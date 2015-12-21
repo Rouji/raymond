@@ -101,6 +101,7 @@
     <ClCompile Include="raytracer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="mat4.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="PPMWriter.h" />
     <ClInclude Include="vec3.h" />
