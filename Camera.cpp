@@ -6,7 +6,7 @@ namespace raymond
 Camera::Camera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsigned int resX, unsigned int resY, float fov)
 {
     m_eye = eye;
-    float aspect = (float)resY / (float)resY;
+    float aspect = (float)resY / (float)resX;
     vec3f viewDir = lookAt - eye;
     vec3f u = viewDir.cross(up).normalise();
     vec3f v = u.cross(viewDir).normalise();
@@ -23,7 +23,6 @@ Camera::Camera(const vec3f & eye, const vec3f & lookAt, const vec3f & up, unsign
 
 ray3f Camera::getRay(unsigned int pixelX, unsigned int pixelY)
 {
-
     return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pixelX) + (m_vecPerPixelY * pixelY));
 }
 
