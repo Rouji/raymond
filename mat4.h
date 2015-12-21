@@ -303,6 +303,9 @@ inline T & mat4<T>::operator()(int row, int col)
     return M[col + 4 * row];
 }
 
+
+typedef mat4<float> mat4f;
+
 }//raymond
 #endif // !__MAT4_H
 
