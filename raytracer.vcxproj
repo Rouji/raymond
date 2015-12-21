@@ -99,6 +99,8 @@
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CPPMImageWriter.cpp" />
+    <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneLoader.cpp" />
     <ClCompile Include="raytracer.cpp" />
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="tinyxml2\tinyxml2.cpp" />
@@ -107,6 +109,7 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="col4.h" />
     <ClInclude Include="CLight.h" />
+    <ClInclude Include="CSceneLoader.h" />
     <ClInclude Include="mat4.h" />
     <ClInclude Include="SMaterial.h" />
     <ClInclude Include="maths.h" />
@@ -117,6 +120,7 @@
     <ClInclude Include="CSphere.h" />
     <ClInclude Include="tinyxml2\tinyxml2.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="vec2.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
