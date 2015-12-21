@@ -41,7 +41,13 @@ public:
     vec3<T> getScale();
 
 
+    //TODO: rotation
 
+
+    //transform a vector by this matrix
+    vec3<T> transform(const vec3<T>& v);
+
+    
     bool operator==(const mat4<T>& o);
     bool operator!=(const mat4<T>& o);
 
@@ -164,6 +170,18 @@ inline vec3<T> mat4<T>::getScale()
     return vec3<T>(M[0 * 4 + 0],
                    M[1 * 4 + 1],
                    M[2 * 4 + 2]);
+}
+
+template<class T>
+inline vec3<T> mat4<T>::transform(const vec3<T>& v)
+{
+    T result[3];
+
+    result[0] = v.X*M[0] + v.X*M[4] + v.X*M[ 8] + M[12];
+    result[1] = v.X*M[1] + v.X*M[5] + v.X*M[ 9] + M[13];
+    result[2] = v.X*M[2] + v.X*M[6] + v.X*M[10] + M[14];
+
+    return vec3<T>(result[0],result[1],result[2]);
 }
 
 template<class T>
