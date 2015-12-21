@@ -2,7 +2,8 @@
 
 namespace raymond
 {
-
+namespace scene
+{
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
@@ -59,4 +60,5 @@ float Sphere::getRadius()
     return m_Radius;
 }
 
+}//scene
 }//raymond

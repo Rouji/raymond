@@ -7,6 +7,8 @@
 
 namespace raymond
 {
+namespace scene
+{
 
 struct SIntersection
 {
@@ -36,6 +38,7 @@ protected:
     SMaterial m_material;
 };
 
+} //scene
 } //raymond
 
 #endif // !__CSCENEOBJECT_H

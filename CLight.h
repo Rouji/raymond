@@ -6,6 +6,8 @@
 
 namespace raymond
 {
+namespace scene
+{
 
 class CLight
 {
@@ -37,7 +39,8 @@ public:
     f32 FalloffAlpha2;
 };
 
-}
+}//scene
+}//raymond
 
 #endif // !__CLIGHT_H
 

@@ -2,6 +2,8 @@
 
 namespace raymond
 {
+namespace scene
+{
 
 CCamera::CCamera(const vec3f & eye, 
                  const vec3f & lookAt, 
@@ -31,5 +33,5 @@ ray3f CCamera::getRay(u32 pixelX, u32 pixelY)
     return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pixelX) + (m_vecPerPixelY * pixelY));
 }
 
-
+} //scene
 } //raymond

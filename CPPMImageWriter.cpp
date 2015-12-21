@@ -41,7 +41,6 @@ u32 CPPMImageWriter::SetPixel(const vec2i& pos, const col4f& col)
         return 1;
 
     col4f tmpCol = col * 255.0f;
-
     tmpCol.clamp(0.0f, 255.0f);
 
     u32 pixelInd = pos.X*3 + (pos.Y * m_size.X * 3);

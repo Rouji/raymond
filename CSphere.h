@@ -6,6 +6,8 @@
 
 namespace raymond
 {
+namespace scene
+{
 
 class Sphere : protected CSceneObject
 {
@@ -23,6 +25,7 @@ private:
     f32 m_Radius;
 };
 
+} //scene
 } //raymond
 
 #endif // !__CSPHERE_H

@@ -8,6 +8,8 @@
 
 namespace raymond
 {
+namespace scene
+{
 
 class CCamera
 {
@@ -25,12 +27,17 @@ public:
 
 private:
     vec3f m_eye;
+    vec3f m_lookAt;
+    vec3f m_up;
+    u32 m_resX;
+    u32 m_resY;
+    f32 m_fov;
     vec3f m_viewPlaneCorner; //bottom-left corner of view plane
     vec3f m_vecPerPixelX; //vector to add to a point on the view plane to get to ne next pixel along x
     vec3f m_vecPerPixelY; //vector to add to a point on the view plane to get to ne next pixel along y
 };
 
-
+} //scene
 } //raymond
 
 #endif // !__CCAMERA_H

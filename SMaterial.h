@@ -5,6 +5,8 @@
 
 namespace raymond
 {
+namespace scene
+{
 
 struct SMaterial
 {
@@ -19,6 +21,7 @@ struct SMaterial
     f32 Refraction; //index of refraction
 };
 
+} //scene
 } //raymond
 
 #endif // !__SMATERIAL_H
