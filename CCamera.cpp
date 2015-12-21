@@ -25,7 +25,7 @@ ray3f CCamera::getRay(const vec2i& pos)
     if (m_dirty)
         computePlane();
 
-    return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pos.X) + (m_vecPerPixelY * pos.Y));
+    return ray3f(m_eye, m_viewPlaneCorner + (m_vecPerPixelX * pos.X) + (m_vecPerPixelY * (m_imageSize.Y - pos.Y)));
 }
 
 void CCamera::setEyePoint(const vec3f & eye)

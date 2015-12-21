@@ -24,6 +24,7 @@ public:
             u32 maxBounces = 5);
 
     //return a ray for a given screen pixel
+    //0,0 starts at the top left
     ray3f getRay(const vec2i& pos);
 
     void setEyePoint(const vec3f& eye);

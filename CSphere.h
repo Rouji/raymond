@@ -9,15 +9,15 @@ namespace raymond
 namespace scene
 {
 
-class Sphere : protected CSceneObject
+class CSphere : public CSceneObject
 {
 public:
     bool intersect(const ray3f& ray, SIntersection* pIntersect);
 
-    Sphere& setPosition(const vec3f& p);
+    CSphere& setPosition(const vec3f& p);
     const vec3f& getPosition();
 
-    Sphere& setRadius(float r);
+    CSphere& setRadius(float r);
     float getRadius();
 
 private:

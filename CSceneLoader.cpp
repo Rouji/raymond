@@ -74,7 +74,6 @@ CScene* CSceneLoader::loadXML(const char* path)
     {
         for (pChild = pLightsElement->FirstChildElement(); pChild; pChild = pChild->NextSiblingElement())
         {
-            const char* tmp = pChild->Name();
             pLightTmp = xmlElemToLight(pChild);
             if (pLightTmp)
                 pNewScene->addLight(pLightTmp);
@@ -87,7 +86,16 @@ CScene* CSceneLoader::loadXML(const char* path)
     CSceneObject* pObjTmp = 0;
     if (pObjectsElement)
     {
-        //TODO
+        for (pChild = pObjectsElement->FirstChildElement(); pChild; pChild = pChild->NextSiblingElement())
+        {
+            pObjTmp = xmlElemToSceneObject(pChild);
+            if (pObjTmp)
+                pNewScene->addSceneObject(pObjTmp);
+        }
+    }
+    else
+    {
+        //TODO: "no objects defined"
     }
 
     return pNewScene;
@@ -138,7 +146,6 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
         return 0;
     }
 
-
     if (XMLUtil::StringEqual(pElem->Name(), "parallel_light"))
         type = CLight::LIGHT_PARALLEL;
     else if (XMLUtil::StringEqual(pElem->Name(), "point_light"))
@@ -159,6 +166,73 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
     
 
     return pNewLight;
+}
+
+CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
+{
+    XMLElement* pPosElem = pElem->FirstChildElement("position");
+    XMLElement* pMatElem = pElem->FirstChildElement("material_solid");
+    if (!pMatElem) pMatElem = pElem->FirstChildElement("material_textured"); //try textured material as well
+
+    if (!pPosElem ||
+        !pMatElem)
+    {
+        //TODO: "no position/material specified
+        return 0;
+    }
+
+    float radius = xmlElemGetFloatAttrib(pElem, "radius");
+
+    CSphere* pNewSphere = new CSphere();
+    pNewSphere->setPosition(xmlElemToVec(pPosElem));
+    pNewSphere->setRadius(radius);
+
+    if (xmlElemToMaterial(pMatElem, &pNewSphere->Material))
+    {
+        //TODO
+        delete pNewSphere;
+        return 0;
+    }
+
+    return pNewSphere;
+}
+
+CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
+{
+    if (XMLUtil::StringEqual(pElem->Name(), "sphere"))
+    {
+        return xmlElemToSphere(pElem);
+    }
+    return 0;
+}
+
+u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat)
+{
+    XMLElement* pColElem = pElem->FirstChildElement("color");
+    XMLElement* pPhongElem = pElem->FirstChildElement("phong");
+    XMLElement* pReflElem = pElem->FirstChildElement("reflectance");
+    XMLElement* pTransElem = pElem->FirstChildElement("transmittance");
+    XMLElement* pRefrElem = pElem->FirstChildElement("refraction");
+    if (!pColElem   ||
+        !pPhongElem ||
+        !pReflElem  ||
+        !pTransElem ||
+        !pRefrElem)
+    { 
+        //TODO: "material misses parameters"
+        return 1;
+    }
+
+    pMat->Colour = xmlElemToColour(pColElem);
+    pMat->Reflectance   = xmlElemGetFloatAttrib(pReflElem,  "r");
+    pMat->Refraction    = xmlElemGetFloatAttrib(pRefrElem,  "iof");
+    pMat->Transmittance = xmlElemGetFloatAttrib(pTransElem, "t");
+    pMat->ka  = xmlElemGetFloatAttrib(pPhongElem, "ka");
+    pMat->kd  = xmlElemGetFloatAttrib(pPhongElem, "kd");
+    pMat->ks  = xmlElemGetFloatAttrib(pPhongElem, "ks");
+    pMat->exp = xmlElemGetFloatAttrib(pPhongElem, "exponent");
+    
+    return 0;
 }
 
 vec3f CSceneLoader::xmlElemToVec(tinyxml2::XMLElement* pElem)

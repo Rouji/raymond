@@ -7,7 +7,7 @@ namespace scene
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
-bool Sphere::intersect(const ray3f& ray, SIntersection* pIntersect)
+bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
 {
     float int0, int1;
     float radiusSquared = maths::square(m_Radius);
@@ -32,30 +32,34 @@ bool Sphere::intersect(const ray3f& ray, SIntersection* pIntersect)
         return false;
 
 
-    pIntersect->Inter = intersectionDist;
-    pIntersect->Normal = (ray.getPointAtDistance(intersectionDist) - m_Center).normalise();
+    pIntersect->IntersectionPoint = ray.getPointAtDistance(intersectionDist);
+    pIntersect->Normal = (pIntersect->IntersectionPoint - m_Center).normalise();
+
+    //offset the intersection point slightly from the sphere to avoid rounding errors
+    //putting us inside the sphere
+    pIntersect->IntersectionPoint += pIntersect->Normal * FLOAT_ROUNDING_ERROR_32; 
 
     return true;
 }
 
-Sphere& Sphere::setPosition(const vec3f& p)
+CSphere& CSphere::setPosition(const vec3f& p)
 {
     m_Center = p;
     return *this;
 }
 
-const vec3f & Sphere::getPosition()
+const vec3f & CSphere::getPosition()
 {
     return m_Center;
 }
 
-Sphere & Sphere::setRadius(float r)
+CSphere & CSphere::setRadius(float r)
 {
     m_Radius = r;
     return *this;
 }
 
-float Sphere::getRadius()
+float CSphere::getRadius()
 {
     return m_Radius;
 }

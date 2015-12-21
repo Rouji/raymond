@@ -12,30 +12,19 @@ namespace scene
 
 struct SIntersection
 {
-    float Inter;
+    vec3f IntersectionPoint;
     vec3f Normal;
 };
 
 class CSceneObject
 {
 public:
+    SMaterial Material;
+
     CSceneObject() {};
     ~CSceneObject() {};
 
     virtual bool intersect(const ray3f& ray, SIntersection* pIntersect) = 0;
-
-    void setMaterial(const SMaterial& m)
-    {
-        m_material = m;
-    }
-
-    const SMaterial& getMaterial()
-    {
-        return m_material;
-    }
-
-protected:
-    SMaterial m_material;
 };
 
 } //scene
