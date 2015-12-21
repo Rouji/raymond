@@ -1,14 +1,16 @@
 #include "CScene.h"
 #include "CPPMImageWriter.h"
 
+#include <stdio.h>
+
 namespace raymond
 {
 namespace scene
 {
 
 CScene::CScene() :
-    m_clearCol(0.0f),
-    m_pCamera(0)
+    m_pCamera(0),
+    m_clearCol(0.0f)
 {}
 
 CScene::~CScene()
@@ -52,13 +54,13 @@ u32 CScene::render()
     io::CPPMImageWriter writer(imageSize);
     ray3f ray;
     col4f pixelCol;
-    for (s32 y = 0; y < imageSize.Y; ++y)
+    for (u32 y = 0; y < imageSize.Y; ++y)
     {
-        for (s32 x = 0; x < imageSize.X; ++x)
+        for (u32 x = 0; x < imageSize.X; ++x)
         {
-            ray = m_pCamera->getRay(vec2i(x, y));
+            ray = m_pCamera->getRay(vec2i((s32)x, (s32)y));
             pixelCol = trace(ray);
-            writer.SetPixel(dim2i(x, y), pixelCol);
+            writer.SetPixel(dim2i((s32)x, (s32)y), pixelCol);
         }
     }
     writer.Write(m_imagePath);

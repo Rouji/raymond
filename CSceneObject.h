@@ -22,7 +22,7 @@ public:
     SMaterial Material;
 
     CSceneObject() {};
-    virtual ~CSceneObject() {};
+    virtual ~CSceneObject() = 0;
 
     virtual bool intersect(const ray3f& ray, SIntersection* pIntersect) = 0;
 };

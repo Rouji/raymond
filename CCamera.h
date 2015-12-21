@@ -44,7 +44,6 @@ public:
 private:
     //(re)compute parameters needed form pixel rays
     void computePlane();
-    bool m_dirty; //true -> needs to be recomputed
 
     vec3f m_eye;
     vec3f m_lookAt;
@@ -55,6 +54,7 @@ private:
     vec3f m_vecPerPixelX; //vector to add to a point on the view plane to get to ne next pixel along x
     vec3f m_vecPerPixelY; //vector to add to a point on the view plane to get to ne next pixel along y
     u32 m_maxBounces; //max bounces for each ray
+    bool m_dirty; //true -> needs to be recomputed
 };
 
 } //scene
