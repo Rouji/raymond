@@ -12,6 +12,7 @@ namespace raymond
 namespace scene
 {
 
+//used for calculating eye-rays
 class CCamera
 {
 public:

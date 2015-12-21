@@ -10,6 +10,8 @@ namespace raymond
 
 
 //4 component (RGB+A) colour class
+//pretty much just implements all basic operators
+//to make colour maths easier
 template <class T>
 class col4
 {

@@ -4,6 +4,10 @@
 
 #include "types.h"
 
+//maths functions and constants
+//some mere proxies for math.h functions, just in case someone needs to 
+//swap them out for other implementations
+
 const f32 FLOAT_ROUNDING_ERROR_32 = 0.000001f;
 const f64 FLOAT_ROUNDING_ERROR_64 = 0.0000001;
 

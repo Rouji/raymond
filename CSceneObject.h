@@ -16,6 +16,7 @@ struct SIntersection
     vec3f Normal;
 };
 
+//abstract class for scene objects
 class CSceneObject
 {
 public:
@@ -24,6 +25,7 @@ public:
     CSceneObject() {};
     virtual ~CSceneObject() {};
 
+    //has to be implemented by all inherited classes
     virtual bool intersect(const ray3f& ray, SIntersection* pIntersect) = 0;
 };
 

@@ -10,6 +10,8 @@ namespace raymond
 namespace io
 {
 
+//simple PPM image writer
+//TODO: abstract (and build a writer for a non-stupid image format)
 class CPPMImageWriter
 {
 public:

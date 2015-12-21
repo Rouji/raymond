@@ -10,12 +10,14 @@ namespace raymond
 namespace scene
 {
 
+//reads XML, creates a CScene object
 class CSceneLoader
 {
 public:
     CSceneLoader();
     ~CSceneLoader();
 
+    //note: the returned object has to be deleted after use
     CScene* loadXML(const char* path);
 private:
     CCamera* xmlElemToCamera(tinyxml2::XMLElement* pElem);

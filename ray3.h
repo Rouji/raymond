@@ -7,6 +7,7 @@
 namespace raymond
 {
 
+//class describing a ray by its origin and direction
 template <class T>
 class ray3
 {
@@ -17,6 +18,8 @@ public:
         setDirection(direction);
     }
 
+    //copy constr.
+    //assumes the direction is already normalised in the other ray
     ray3(const ray3<T>& o)
     {
         m_origin = o.m_origin;
@@ -46,6 +49,7 @@ public:
         return m_direction;
     }
 
+    //gets a point along the ray at distance d 
     vec3<T> getPointAtDistance(T d) const
     {
         return m_origin + (m_direction*d);

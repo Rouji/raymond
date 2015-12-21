@@ -10,6 +10,7 @@ namespace scene
 
 struct SMaterial
 {
+    //TODO: store type (plain colour/texture)?
     //TODO: texture (file path? pointer to some cache in memory?)
     col4f Colour;
     f32 ka; //phong ambient component

@@ -10,6 +10,8 @@ namespace raymond
 namespace scene
 {
 
+//hold all parameters for a light in a scene
+//and provides shading computation
 class CLight
 {
 public:

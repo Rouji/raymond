@@ -9,6 +9,8 @@ namespace raymond
 namespace scene
 {
 
+//implements CSceneObject for spheres
+//TODO: transformations
 class CSphere : public CSceneObject
 {
 public:

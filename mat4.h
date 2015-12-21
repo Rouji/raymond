@@ -10,6 +10,9 @@
 namespace raymond
 {
 
+//4x4 matrix class
+//not yet used, also still lacks rotation functions and some more testing
+
 template <class T>
 class mat4
 {
