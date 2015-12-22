@@ -42,6 +42,7 @@ void CScene::setClearColour(const col4f& col)
 
 void CScene::setImagePath(const char* path)
 {
+    //TODO: prevent buffer overruns etc. (oh noez my security)
     sprintf(m_imagePath, "%s.ppm", path);
 }
 
@@ -113,6 +114,7 @@ col4f CScene::trace(const ray3f& ray, u32 depth)
     {
         if (!intersectShadow(intersect.IntersectionPoint, *it))
         {
+            //TODO: account for rounding error
             overallCol += (*it)->shade(intersect.IntersectionPoint,
                 intersect.Normal,
                 m_pCamera->getEyePoint(),
