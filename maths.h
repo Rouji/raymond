@@ -56,6 +56,12 @@ inline T square(const T& n)
 }
 
 template <class T>
+inline T powf(const T& base, const T& exp)
+{
+    return (T)pow((f64)base, (f64)exp);
+}
+
+template <class T>
 inline T min(const T& a, const T& b)
 {
     return a < b ? a : b;

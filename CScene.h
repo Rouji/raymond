@@ -35,6 +35,8 @@ public:
 private:
     //recursive ray-trace function
     col4f trace(const ray3f& ray, u32 depth = 0);
+    CSceneObject* intersectScene(const ray3f& ray, SIntersection* pIntersect);
+    bool intersectShadow(const vec3f& origin, CLight* pLight);
 
     std::list<CSceneObject*> m_objectList;
     std::list<CLight*> m_lightList;

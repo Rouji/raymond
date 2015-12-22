@@ -75,7 +75,7 @@ public:
     col4<T>& operator+=(const col4<T>& o)
     {
         R += o.R;
-        G += o.g;
+        G += o.G;
         B += o.B;
         A += o.A;
         return *this;
@@ -89,7 +89,7 @@ public:
     col4<T>& operator-=(const col4<T>& o)
     {
         R -= o.R;
-        G -= o.g;
+        G -= o.G;
         B -= o.B;
         A -= o.A;
         return *this;
@@ -103,7 +103,7 @@ public:
     col4<T>& operator*=(const col4<T>& o)
     {
         R *= o.R;
-        G *= o.g;
+        G *= o.G;
         B *= o.B;
         A *= o.A;
         return *this;
@@ -131,7 +131,7 @@ public:
     col4<T>& operator/=(const col4<T>& o)
     {
         if (!equals(R, 0)) R /= o.R;
-        if (!equals(G, 0)) G /= o.g;
+        if (!equals(G, 0)) G /= o.G;
         if (!equals(B, 0)) B /= o.B;
         if (!equals(A, 0)) A /= o.A;
         return *this;

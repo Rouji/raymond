@@ -35,10 +35,6 @@ bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
     pIntersect->IntersectionPoint = ray.getPointAtDistance(intersectionDist);
     pIntersect->Normal = (pIntersect->IntersectionPoint - m_Center).normalise();
 
-    //offset the intersection point slightly from the sphere to avoid rounding errors
-    //putting us inside the sphere
-    pIntersect->IntersectionPoint += pIntersect->Normal * FLOAT_ROUNDING_ERROR_32; //TODO: tweak?
-
     return true;
 }
 

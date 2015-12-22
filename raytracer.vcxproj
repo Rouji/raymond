@@ -98,6 +98,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CLight.cpp" />
     <ClCompile Include="CPPMImageWriter.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneLoader.cpp" />

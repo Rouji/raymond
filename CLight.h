@@ -3,6 +3,7 @@
 
 #include "col4.h"
 #include "vec3.h"
+#include "SMaterial.h"
 
 namespace raymond
 {
@@ -30,6 +31,8 @@ public:
     {}
 
     ~CLight(){}
+
+    col4f shade(const vec3f& point, const vec3f& normal, const vec3f& eye, const SMaterial& mat);
 
     LightType Type;
     col4f Colour;

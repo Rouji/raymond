@@ -109,17 +109,22 @@ public:
     }
 
     //dot product
-    T dot(const vec3<T>& o)
+    T dot(const vec3<T>& o) const
     {
         return X*o.X + Y*o.Y + Z*o.Z;
     }
 
     //cross product
-    vec3<T> cross(const vec3<T>& o)
+    vec3<T> cross(const vec3<T>& o) const
     {
         return vec3<T>(Y*o.Z - Z*o.Y,
                        Z*o.X - X*o.Z,
                        X*o.Y - Y*o.X);
+    }
+
+    vec3<T> mirrorAlongNormal(const vec3<T>& normal) const
+    {
+        return (normal * dot(normal) * 2) - *this;
     }
 
     //returns new vector linearly interpolated between this and the other one
