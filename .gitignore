@@ -6,3 +6,4 @@ raytracer.vcxproj.filters
 Debug/
 Release/
 Bin/
+*.vcxproj.user

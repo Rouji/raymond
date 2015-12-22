@@ -27,7 +27,7 @@ CScene* CSceneLoader::loadXML(const char* path)
     XMLDocument doc;
     if (doc.LoadFile((const char*)path) != tinyxml2::XML_NO_ERROR)
     {
-        LogError("Couldn't load file \"%s\"\n",path);
+        LogError("[SceneLoader] Couldn't find file \"%s\"\n",path);
         return 0;
     }
 
@@ -37,19 +37,19 @@ CScene* CSceneLoader::loadXML(const char* path)
     XMLElement* pSceneElement = doc.FirstChildElement("scene");
     if (!pSceneElement)
     {
-        //TODO: "no scene element"
+        LogError("[SceneLoader] Root \"scene\" node not found\n");
         return 0;
     }
     if (!pSceneElement->FirstChild())
     {
-        //TODO: "scene element empty"
+        LogError("[SceneLoader] \"scene\" node is empty\n");
         return 0;
     }
 
     const char* output_file = pSceneElement->Attribute("output_file");
     if (!output_file)
     {
-        //TODO: "no output file specified"
+        LogError("[SceneLoader] No output file specified\n");
         return 0;
     }
 
@@ -66,11 +66,17 @@ CScene* CSceneLoader::loadXML(const char* path)
     //load camera
     if (pChild = pSceneElement->FirstChildElement("camera"))
     {
-        pNewScene->setCamera(xmlElemToCamera(pChild));
+        CCamera* pCam = xmlElemToCamera(pChild);
+        if (!pCam)
+        {
+            LogError("[SceneLoader] Failed loading camera node\n");
+            return 0;
+        }
+        pNewScene->setCamera(pCam);
     }
     else
     {
-        //TODO: "no camera defined"
+        LogError("[SceneLoader] No camera specified in scene\n");
     }
 
     //load lights
@@ -84,6 +90,11 @@ CScene* CSceneLoader::loadXML(const char* path)
             if (pLightTmp)
                 pNewScene->addLight(pLightTmp);
         }
+    }
+    if (!pLightTmp)
+    {
+        LogError("[SceneLoader] No lights specified in scene\n");
+        return 0;
     }
 
 
@@ -101,7 +112,7 @@ CScene* CSceneLoader::loadXML(const char* path)
     }
     else
     {
-        //TODO: "no objects defined"
+        LogError("[SceneLoader] No renderable surfaces found\n");
     }
 
     return pNewScene;
@@ -119,14 +130,14 @@ CCamera* CSceneLoader::xmlElemToCamera(tinyxml2::XMLElement* pElem)
         !pLookAtElem ||
         !pUpElem)
     {
-        //TODO: "missing essential positional data"
+        LogError("[SceneLoader] Camera element is missing positional data\n");
         return 0;
     }
     if (!pFOVElem ||
         !pResElem ||
         !pBouncesElem)
     {
-        //TODO: "notice: some data missing, using defaults"
+        LogError("[SceneLoader] Some camera parameters missing, using defaults\n");
     }
 
     CCamera* pNewCam = new CCamera(xmlElemToVec(pPosElem),
@@ -149,7 +160,7 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
     XMLElement* pFallElem  = pElem->FirstChildElement("falloff");
     if (!pColElem)
     {
-        //TODO: "light has no colour specified"
+        LogError("[SceneLoader] No colour specified in light node\n");
         return 0;
     }
 
@@ -184,7 +195,7 @@ CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
     if (!pPosElem ||
         !pMatElem)
     {
-        //TODO: "no position/material specified
+        LogError("[SceneLoader] Sphere element missing position or material\n");
         return 0;
     }
 
@@ -196,7 +207,7 @@ CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
 
     if (xmlElemToMaterial(pMatElem, &pNewSphere->Material))
     {
-        //TODO
+        LogError("[SceneLoader] Failed loading material for sphere\n");
         delete pNewSphere;
         return 0;
     }
@@ -226,7 +237,7 @@ u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat
         !pTransElem ||
         !pRefrElem)
     { 
-        //TODO: "material misses parameters"
+        LogError("[SceneLoader] Material has missing parameters\n");
         return 1;
     }
 
