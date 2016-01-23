@@ -25,7 +25,7 @@ ray3f CCamera::getRay(const vec2i& pos)
     if (m_dirty)
         computePlane();
 
-    vec3f planeCoord = (m_vecPerPixelX * (f32)pos.X) + (m_vecPerPixelY * (f32)(m_imageSize.Y - pos.Y));
+    vec3f planeCoord = (m_vecPerPixelX * (f32)pos.X) + (m_vecPerPixelY * ((f32)(m_imageSize.Y - pos.Y)-1.0f));
     vec3f worldCoord = m_viewPlaneCorner + planeCoord;
     vec3f dir = worldCoord - m_eye;
     return ray3f(m_eye, dir);
