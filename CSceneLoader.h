@@ -2,7 +2,7 @@
 #define __CSCENELOADER_H
 
 #include "CScene.h"
-#include "CSphere.h"
+#include "CSphereSceneObject.h"
 #include "tinyxml2/tinyxml2.h"
 
 namespace raymond

@@ -1,4 +1,4 @@
-#include "CSphere.h"
+#include "CSphereSceneObject.h"
 
 namespace raymond
 {
