@@ -27,8 +27,6 @@ u32 CObjMesh::load(const char * path)
     m_verts.clear();
 
     char lineBuffer[1024];
-    size_t len = 0;
-    size_t read = 0;
     vec3f vert;
     vec3f norm;
     vec2f tex;
