@@ -39,6 +39,32 @@ public:
         return !(*this == o)
     }
 
+    triangle3<T> operator+(const vec3<T>& o) const
+    {
+        return triangle3<T>(A + o, B + o, C + o);
+    }
+
+    triangle3<T>& operator+=(const vec3<T>& o)
+    {
+        A += o;
+        B += o;
+        C += o;
+        return *this;
+    }
+
+    triangle3<T> operator-(const vec3<T>& o) const
+    {
+        return triangle3<T>(A - o, B - o, C - o);
+    }
+
+    triangle3<T>& operator-=(const vec3<T>& o)
+    {
+        A -= o;
+        B -= o;
+        C -= o;
+        return *this;
+    }
+
     //returns non-normalised normal
     vec3<T> getNormalFast() const
     {
@@ -64,7 +90,7 @@ public:
         t2 = normal.dot(ray.getDirection());
         if (maths::equals(t2, 0.0f, FLOAT_ROUNDING_ERROR_32))
         {
-            return false;
+            return ETriangleIntersection::NONE;
         }
 
         d = A.dot(normal);
