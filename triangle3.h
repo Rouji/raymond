@@ -83,7 +83,7 @@ public:
     //sets pOut to the point of intersection
     ETriangleIntersection intersect(const ray3<T>& ray, vec3<T>* pIntersect)
     {
-        vec3<T> normal = getNormal();
+        vec3<T> normal = getNormalFast();
         vec3<T> inter; //intersection point on plane
         T t1; T t2; T d;
 
@@ -94,7 +94,7 @@ public:
         }
 
         d = A.dot(normal);
-        t1 = -(normal.dot(ray.getOrigin())) / t2;
+        t1 = -(normal.dot(ray.getOrigin()) - d) / t2;
         
         //intersection is behind the ray origin
         if (t1 < 0)
