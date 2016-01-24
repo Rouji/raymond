@@ -141,7 +141,7 @@ public:
 
     col4<T> operator/(const T& n) const
     {
-        if (maths::equals(n, n)) return *this;
+        if (maths::equals(n, 0)) return *this;
         return col4<T>(R / n, G / n, B / n, A / n);
     }
 
