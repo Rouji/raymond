@@ -108,7 +108,6 @@
     <ClCompile Include="raytracer.cpp" />
     <ClCompile Include="CSphereSceneObject.cpp" />
     <ClCompile Include="tinyxml2\tinyxml2.cpp" />
-    <ClCompile Include="triangletest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
