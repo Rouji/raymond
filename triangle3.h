@@ -90,7 +90,7 @@ public:
         t2 = normal.dot(ray.getDirection());
         if (maths::equals(t2, 0.0f, FLOAT_ROUNDING_ERROR_32))
         {
-            return ETriangleIntersection::NONE;
+            return NONE;
         }
 
         d = A.dot(normal);
@@ -98,7 +98,7 @@ public:
         
         //intersection is behind the ray origin
         if (t1 < 0)
-            return ETriangleIntersection::NONE;
+            return NONE;
 
         //get the intersection point on the plane
         inter = ray.getPointAtDistance(t1);
@@ -122,15 +122,15 @@ public:
         //check which side the point is on, for all 3 edges 
         cross = AB.cross(AP);
         if (normal.dot(cross) < 0)
-            return ETriangleIntersection::ON_PLANE;
+            return ON_PLANE;
         cross = BC.cross(BP);
         if (normal.dot(cross) < 0)
-            return ETriangleIntersection::ON_PLANE;
+            return ON_PLANE;
         cross = CA.cross(CP);
         if (normal.dot(cross) < 0)
-            return ETriangleIntersection::ON_PLANE;
+            return ON_PLANE;
 
-        return ETriangleIntersection::INSIDE_TRIANGLE;
+        return INSIDE_TRIANGLE;
     }
 
 };

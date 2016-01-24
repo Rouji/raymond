@@ -27,7 +27,7 @@ bool CMeshSceneObject::intersect(const ray3f & ray, SIntersection * pIntersect)
 
     for (u32 i = 0; i < m_faces.size(); ++i)
     {
-        if (m_faces[i].intersect(ray, &inter) == ETriangleIntersection::INSIDE_TRIANGLE)
+        if (m_faces[i].intersect(ray, &inter) == INSIDE_TRIANGLE)
         {
             distSquared = ray.getOrigin().distanceSquared(inter);
             if (nearestInd == -1 || distSquared < nearestSquared)
