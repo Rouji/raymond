@@ -85,23 +85,25 @@ public:
     {
         vec3<T> normal = getNormalFast();
         vec3<T> inter; //intersection point on plane
-        T t1; T t2; T d;
+        T normDotDir;
+        T t; 
+        T d;
 
-        t2 = normal.dot(ray.getDirection());
-        if (maths::equals(t2, 0.0f, FLOAT_ROUNDING_ERROR_32))
+        normDotDir = normal.dot(ray.getDirection());
+        if (maths::equals(normDotDir, 0.0f, FLOAT_ROUNDING_ERROR_32))
         {
             return NONE;
         }
 
         d = A.dot(normal);
-        t1 = -(normal.dot(ray.getOrigin()) - d) / t2;
+        t = -(normal.dot(ray.getOrigin()) - d) / normDotDir;
         
         //intersection is behind the ray origin
-        if (t1 < 0)
+        if (t < 0)
             return NONE;
 
         //get the intersection point on the plane
-        inter = ray.getPointAtDistance(t1);
+        inter = ray.getPointAtDistance(t);
 
         //set out parameter
         if (pIntersect)
