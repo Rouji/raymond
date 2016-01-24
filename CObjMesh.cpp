@@ -71,6 +71,7 @@ u32 CObjMesh::load(const char * path)
             break;
         }
     }
+    return 0;
 }
 
 }
