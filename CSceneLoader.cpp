@@ -32,10 +32,10 @@ CScene* CSceneLoader::loadXML(const char* path)
     }
 
     //get base path
-    memcpy(basePath, path, strlen(path)+1);
+    strcpy(basePath, path);
     char* p = strrchr(basePath, '/');
     if (p) 
-        p[0] = 0;
+        *p = 0;
 
     XMLElement* pChild = 0; //used as general child pointer
     XMLElement* pLightsElement = 0;
