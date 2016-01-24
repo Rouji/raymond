@@ -97,7 +97,7 @@ public:
     }
 
     //distance to another vector
-    T distance(const vec3<T>& o)
+    T distance(const vec3<T>& o) const
     {
         return (*this - o).length();
     }
