@@ -186,7 +186,7 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
     return pNewLight;
 }
 
-CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
+CSphereSceneObject* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
 {
     XMLElement* pPosElem = pElem->FirstChildElement("position");
     XMLElement* pMatElem = pElem->FirstChildElement("material_solid");
@@ -201,7 +201,7 @@ CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
 
     float radius = xmlElemGetFloatAttrib(pElem, "radius");
 
-    CSphere* pNewSphere = new CSphere();
+    CSphereSceneObject* pNewSphere = new CSphereSceneObject();
     pNewSphere->setPosition(xmlElemToVec(pPosElem));
     pNewSphere->setRadius(radius);
 

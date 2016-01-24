@@ -7,7 +7,7 @@ namespace scene
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
-bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
+bool CSphereSceneObject::intersect(const ray3f& ray, SIntersection* pIntersect)
 {
     float int0, int1;
     float radiusSquared = maths::square(m_Radius);
@@ -38,24 +38,24 @@ bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
     return true;
 }
 
-CSphere& CSphere::setPosition(const vec3f& p)
+CSphereSceneObject& CSphereSceneObject::setPosition(const vec3f& p)
 {
     m_Center = p;
     return *this;
 }
 
-const vec3f & CSphere::getPosition()
+const vec3f & CSphereSceneObject::getPosition()
 {
     return m_Center;
 }
 
-CSphere & CSphere::setRadius(float r)
+CSphereSceneObject & CSphereSceneObject::setRadius(float r)
 {
     m_Radius = r;
     return *this;
 }
 
-float CSphere::getRadius()
+float CSphereSceneObject::getRadius()
 {
     return m_Radius;
 }

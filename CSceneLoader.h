@@ -22,7 +22,7 @@ public:
 private:
     CCamera* xmlElemToCamera(tinyxml2::XMLElement* pElem);
     CLight* xmlElemToLight(tinyxml2::XMLElement* pElem);
-    CSphere* xmlElemToSphere(tinyxml2::XMLElement* pElem);
+    CSphereSceneObject* xmlElemToSphere(tinyxml2::XMLElement* pElem);
     CSceneObject* xmlElemToSceneObject(tinyxml2::XMLElement* pElem);
     u32 xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat);
 
