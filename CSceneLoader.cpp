@@ -272,6 +272,12 @@ CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
 
 u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat)
 {
+    if (XMLUtil::StringEqual(pElem->Name(), "material_textured"))
+    {
+        Log("[SceneLoader] Textured materials not yet supported\n");
+        return 0;
+    }
+
     XMLElement* pColElem = pElem->FirstChildElement("color");
     XMLElement* pPhongElem = pElem->FirstChildElement("phong");
     XMLElement* pReflElem = pElem->FirstChildElement("reflectance");
