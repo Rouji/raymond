@@ -49,6 +49,27 @@ public:
         return m_direction;
     }
 
+    const vec3<T>& setLookAt(const vec3<T>& lookAt)
+    {
+        m_direction = lookAt - m_origin;
+        m_direction.normalise();
+        return m_direction;
+    }
+
+    ray3<T>& set(const vec3<T>& origin = vec3<T>(0), const vec3<T>& direction = vec3<T>(0))
+    {
+        setOrigin(origin);
+        setDirection(direction);
+        return *this;
+    }
+
+    ray3<T>& setByPoints(const vec3<T>& origin = vec3<T>(0), const vec3<T>& lookAt = vec3<T>(0))
+    {
+        setOrigin(origin);
+        setLookAt(lookAt);
+        return *this;
+    }
+
     //gets a point along the ray at distance d 
     vec3<T> getPointAtDistance(T d) const
     {
