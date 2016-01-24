@@ -8,6 +8,9 @@ namespace raymond
 namespace scene
 {
 
+//distance to add between a surface and ray cast from it
+const f32 RECAST_MARGIN = FLOAT_ROUNDING_ERROR_32 * 2.0f; 
+
 CScene::CScene() :
     m_pCamera(0),
     m_clearCol(0.0f)
@@ -115,15 +118,15 @@ col4f CScene::trace(const ray3f& ray, u32 depth)
          it != m_lightList.end();
          it++)
     {
+        //account for rounding errors
+        intersect.IntersectionPoint += (intersect.Normal * RECAST_MARGIN);
+
         if (!intersectShadow(intersect.IntersectionPoint, *it))
         {
-            //account for rounding errors
-            intersect.IntersectionPoint += (intersect.Normal * FLOAT_ROUNDING_ERROR_32 * 2.0f); 
-
             overallCol += (*it)->shade(intersect.IntersectionPoint,
-                intersect.Normal,
-                m_pCamera->getEyePoint(),
-                pCurrObj->Material);
+                                       intersect.Normal,
+                                       m_pCamera->getEyePoint(),
+                                       pCurrObj->Material);
         }
     }
     
@@ -162,18 +165,27 @@ CSceneObject* CScene::intersectScene(const ray3f & ray, SIntersection* pIntersec
 bool CScene::intersectShadow(const vec3f& origin, CLight* pLight)
 {
     ray3f ray(origin);
-    SIntersection inter; //not used here
-
-    //no use checking a ray against ambient
+    SIntersection inter;
+    CSceneObject* pObj = 0;
+    
     if (pLight->Type == CLight::LIGHT_AMBIENT)
+        return false; //no use checking a ray against ambient
+    else if (pLight->Type == CLight::LIGHT_PARALLEL)
+    {
+        ray.setDirection(-pLight->Direction);
+        return intersectScene(ray, &inter) != 0;
+    }
+    else if (pLight->Type == CLight::LIGHT_POINT)
+    {
+        vec3f dir = pLight->Position - origin;
+        ray.setDirection(dir);
+        pObj = intersectScene(ray, &inter);
+        return pObj != 0 && dir.lengthSquared() > origin.distanceSquared(inter.IntersectionPoint);
+    }
+    else if (pLight->Type == CLight::LIGHT_SPOT)
         return false;
 
-    if (pLight->Type == CLight::LIGHT_PARALLEL)
-        ray.setDirection(-pLight->Direction);
-    else
-        ray.setDirection(pLight->Position - origin);
-
-    return intersectScene(ray, &inter) != 0;
+    return false;
 }
 
 }//scene
