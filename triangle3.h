@@ -36,7 +36,7 @@ public:
 
     bool operator!=(const triangle3<T>& o) const
     {
-        return !(*this == o)
+        return !(*this == o);
     }
 
     triangle3<T> operator+(const vec3<T>& o) const
