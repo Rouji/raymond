@@ -18,11 +18,12 @@ searched for relative to the directory, that contains the .xml.
 
 Notes:
 -Textured materials are not yet implemented, so I have included 
-a modified version of example 4, found in scenes/example4_mod.xml, 
-which is the exact same scene, except with a non-textured material 
+modified versions of example 4 and 6, found in 
+scenes/example4_mod.xml and scenes/example4_mod.xml, which are 
+the exact same scenes, except with a non-textured material 
 for the room mesh.
 -Transformations are not implemented either, so example5.xml won't 
-really work at all.
+work properly at all.
 
 
 Libraries/3rd-Party Code:
