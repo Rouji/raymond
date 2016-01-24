@@ -30,7 +30,7 @@ bool CMeshSceneObject::intersect(const ray3f & ray, SIntersection * pIntersect)
         if (m_faces[i].intersect(ray, &inter) == INSIDE_TRIANGLE)
         {
             distSquared = ray.getOrigin().distanceSquared(inter);
-            if (nearestInd == -1 || distSquared < nearestSquared)
+            if (nearestInd == (u32)-1 || distSquared < nearestSquared)
             {
                 pIntersect->IntersectionPoint = inter;
                 pIntersect->Normal = m_normals[i];
@@ -40,7 +40,7 @@ bool CMeshSceneObject::intersect(const ray3f & ray, SIntersection * pIntersect)
         }
     }
 
-    if (nearestInd == -1)
+    if (nearestInd == (u32)-1)
         return false;
 
     return true;
