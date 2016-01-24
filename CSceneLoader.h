@@ -2,6 +2,7 @@
 #define __CSCENELOADER_H
 
 #include "CScene.h"
+#include "CMeshSceneObject.h"
 #include "CSphereSceneObject.h"
 #include "tinyxml2/tinyxml2.h"
 
@@ -22,7 +23,8 @@ public:
 private:
     CCamera* xmlElemToCamera(tinyxml2::XMLElement* pElem);
     CLight* xmlElemToLight(tinyxml2::XMLElement* pElem);
-    CSphereSceneObject* xmlElemToSphere(tinyxml2::XMLElement* pElem);
+    CSphereSceneObject* xmlElemToSphereObject(tinyxml2::XMLElement* pElem);
+    CMeshSceneObject* xmlElemToMeshObject(tinyxml2::XMLElement* pElem);
     CSceneObject* xmlElemToSceneObject(tinyxml2::XMLElement* pElem);
     u32 xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat);
 

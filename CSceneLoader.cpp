@@ -1,5 +1,7 @@
 #include "CSceneLoader.h"
 #include "Log.h"
+#include "CMesh.h"
+#include "CObjMesh.h"
 
 
 
@@ -186,7 +188,7 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
     return pNewLight;
 }
 
-CSphereSceneObject* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
+CSphereSceneObject* CSceneLoader::xmlElemToSphereObject(tinyxml2::XMLElement* pElem)
 {
     XMLElement* pPosElem = pElem->FirstChildElement("position");
     XMLElement* pMatElem = pElem->FirstChildElement("material_solid");
@@ -215,11 +217,54 @@ CSphereSceneObject* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
     return pNewSphere;
 }
 
+CMeshSceneObject * CSceneLoader::xmlElemToMeshObject(tinyxml2::XMLElement * pElem)
+{
+    const char* name = pElem->Attribute("name");
+    XMLElement* pMatElem = pElem->FirstChildElement("material_solid");
+    if (!pMatElem) pMatElem = pElem->FirstChildElement("material_textured"); //try textured material as well
+
+    if (!name)
+    {
+        LogError("[SceneLoader] Mesh element is missing a name (file path)\n");
+        return 0;
+    }
+    if (!pMatElem)
+    {
+        LogError("[SceneLoader] Mesh element missing a material\n");
+        return 0;
+    }
+
+    CObjMesh* pMesh = new CObjMesh();
+    if (pMesh->load(name))
+    {
+        LogError("[SceneLoader] Failed loading mesh from '%s'\n", name);
+        delete pMesh;
+        return 0;
+    }
+
+    CMeshSceneObject* pNewMeshObj = new CMeshSceneObject();
+    //TODO: position etc.
+    pNewMeshObj->setMesh(pMesh);
+
+    if (xmlElemToMaterial(pMatElem, &pNewMeshObj->Material))
+    {
+        LogError("[SceneLoader] Failed loading material for sphere\n");
+        delete pNewMeshObj;
+        return 0;
+    }
+
+    return pNewMeshObj;
+}
+
 CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
 {
     if (XMLUtil::StringEqual(pElem->Name(), "sphere"))
     {
-        return xmlElemToSphere(pElem);
+        return xmlElemToSphereObject(pElem);
+    }
+    else if (XMLUtil::StringEqual(pElem->Name(), "mesh"))
+    {
+        return xmlElemToMeshObject(pElem);
     }
     return 0;
 }
