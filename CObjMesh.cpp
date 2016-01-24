@@ -11,13 +11,13 @@ u32 CObjMesh::load(const char * path)
     FILE* pFile;
     if (!path)
     {
-        io::LogError("[CObjMesh] Got zero-pointer for a path\n");
+        io::LogError("[ObjMesh] Got zero-pointer for a path\n");
         return 1;
     }
 
     if (!(pFile = fopen(path, "r")))
     {
-        io::LogError("[CObjMesh] Could not open file '%s'\n", path);
+        io::LogError("[ObjMesh] Could not open file '%s'\n", path);
         return 2;
     }
 
@@ -48,6 +48,11 @@ u32 CObjMesh::load(const char * path)
             sscanf(lineBuffer + 2, "%d/%d/%d %d/%d/%d %d/%d/%d", &face.VertInd[0], &face.TexInd[0], &face.NormInd[0],
                 &face.VertInd[1], &face.TexInd[1], &face.NormInd[1],
                 &face.VertInd[2], &face.TexInd[2], &face.NormInd[2]);
+            //make indices 0-based
+            face.VertInd[0] -= 1; face.VertInd[1] -= 1; face.VertInd[2] -= 1;
+            face.TexInd[0] -= 1; face.TexInd[1] -= 1; face.TexInd[2] -= 1;
+            face.NormInd[0] -= 1; face.NormInd[1] -= 1; face.NormInd[2] -= 1;
+
             m_faces.push_back(face);
             break;
         case 'v':
