@@ -33,7 +33,6 @@ u32 CObjMesh::load(const char * path)
     vec3f norm;
     vec2f tex;
     SFace face;
-    memset(lineBuffer, 0, 1024);
 
     while (fgets(lineBuffer,1024,pFile))
     {
