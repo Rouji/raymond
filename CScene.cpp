@@ -1,6 +1,6 @@
 #include "CScene.h"
 #include "CPPMImageWriter.h"
-
+#include "Log.h"
 #include <stdio.h>
 
 namespace raymond
@@ -107,6 +107,7 @@ col4f CScene::trace(const ray3f& ray, u32 depth)
     //debug
     //return col4f((intersect.Normal + 1.0f) / 2.0f); //render normals
     //return pCurrObj->Material.Colour; //render base colour only
+    //return col4f(1.0f - (ray.getOrigin().distance(intersect.IntersectionPoint) / 10.0f),0.0f,0.0f); //render depth
 
     
     //iterate through light sources
@@ -116,7 +117,9 @@ col4f CScene::trace(const ray3f& ray, u32 depth)
     {
         if (!intersectShadow(intersect.IntersectionPoint, *it))
         {
-            //TODO: account for rounding error
+            //account for rounding errors
+            intersect.IntersectionPoint += (intersect.Normal * FLOAT_ROUNDING_ERROR_32 * 2.0f); 
+
             overallCol += (*it)->shade(intersect.IntersectionPoint,
                 intersect.Normal,
                 m_pCamera->getEyePoint(),
@@ -131,6 +134,7 @@ col4f CScene::trace(const ray3f& ray, u32 depth)
 CSceneObject* CScene::intersectScene(const ray3f & ray, SIntersection* pIntersect)
 {
     CSceneObject* pNearestObj = 0;
+    SIntersection tmpIntersect;
     f32 nearestSquared = 0;
     f32 distSquared = 0;
 
@@ -140,13 +144,14 @@ CSceneObject* CScene::intersectScene(const ray3f & ray, SIntersection* pIntersec
          it != m_objectList.end();
          it++)
     {
-        if ((*it)->intersect(ray, pIntersect))
+        if ((*it)->intersect(ray, &tmpIntersect))
         {
-            distSquared = ray.getOrigin().distanceSquared(pIntersect->IntersectionPoint);
+            distSquared = ray.getOrigin().distanceSquared(tmpIntersect.IntersectionPoint);
             if (!pNearestObj || distSquared < nearestSquared)
             {
                 pNearestObj = *it;
                 nearestSquared = distSquared;
+                *pIntersect = tmpIntersect;
             }
         }
     }

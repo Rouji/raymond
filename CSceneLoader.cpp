@@ -244,6 +244,7 @@ CMeshSceneObject * CSceneLoader::xmlElemToMeshObject(tinyxml2::XMLElement * pEle
 
     CMeshSceneObject* pNewMeshObj = new CMeshSceneObject();
     //TODO: position etc.
+    //TODO: mesh cache
     pNewMeshObj->setMesh(pMesh);
 
     if (xmlElemToMaterial(pMatElem, &pNewMeshObj->Material))
