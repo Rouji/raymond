@@ -43,8 +43,8 @@ public:
 
 private:
     //recursive ray-trace function
-    //note: doesn't actually recurse yet, at all
-    col4f trace(const ray3f& ray, u32 depth = 0);
+    //depth: how many recursive call to do
+    col4f trace(const ray3f& ray, u32 depth);
 
     //find nearest intersection among all sceneobjects
     CSceneObject* intersectScene(const ray3f& ray, SIntersection* pIntersect);

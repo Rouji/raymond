@@ -27,6 +27,15 @@ public:
 
     //has to be implemented by all inherited classes
     virtual bool intersect(const ray3f& ray, SIntersection* pIntersect) = 0;
+
+    virtual void setPosition(const vec3f& p) = 0;
+    virtual const vec3f& getPosition() = 0;
+
+    virtual void setScale(const vec3f& p) = 0;
+    virtual const vec3f& getScale() = 0;
+
+    virtual void setRotation(const vec3f& p) = 0;
+    virtual const vec3f& getRotation() = 0;
 };
 
 } //scene

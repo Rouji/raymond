@@ -35,22 +35,31 @@ inline bool equals(f64 a, f64 b, f64 tolerance = FLOAT_ROUNDING_ERROR_64)
     return (a + tolerance >= b) && (a - tolerance <= b);
 }
 
-inline float squareroot(f32 n)
+inline f32 squareroot(f32 n)
 {
     return sqrtf(n);
 }
-inline double squareroot(f64 n)
+inline f64 squareroot(f64 n)
 {
     return sqrt(n);
 }
 
-inline float tangent(f32 n)
+inline f32 tangent(f32 n)
 {
     return tanf(n);
 }
-inline double tangent(f64 n)
+inline f64 tangent(f64 n)
 {
     return tan(n);
+}
+
+inline f32 cosine(f32 n)
+{
+    return cosf(n);
+}
+inline f64 cosine(f64 n)
+{
+    return cos(n);
 }
 
 template <class T>

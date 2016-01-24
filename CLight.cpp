@@ -1,5 +1,6 @@
 #include "CLight.h"
 
+#include "Log.h"
 
 namespace raymond
 {
@@ -11,9 +12,10 @@ col4f CLight::shade(const vec3f& point, const vec3f& normal, const vec3f& eye, c
     vec3f vecLight;
     vec3f vecRefl;
     vec3f vecEye;
-    f32 Fa;
-    f32 Fd;
-    f32 Fs;
+    f32 Fa; //ambient
+    f32 Fd; //diffuse
+    f32 Fs; //specular
+    f32 At = 1.0f; //any attenuation
     col4f baseColour = mat.Colour * Colour;
 
     if (Type == LIGHT_AMBIENT)
@@ -29,13 +31,22 @@ col4f CLight::shade(const vec3f& point, const vec3f& normal, const vec3f& eye, c
 
         Fd = maths::clamp(normal.dot(vecLight) * mat.kd, 0.0f, 1.0f);
         Fs = maths::clamp(maths::powf(vecRefl.dot(vecEye), mat.exp) * mat.ks, 0.0f, 1.0f);
-        return baseColour*Fd + baseColour*Fs;
+        return (baseColour*Fd) + col4f(Fs);
     }
-    else if (Type == LIGHT_POINT ||
-             Type == LIGHT_SPOT)
+    else if (Type == LIGHT_POINT)
     {
         //TODO
-        //vecLight = (Position - point).normalise();
+        vecEye = (eye - point).normalise();
+        vecLight = (Position - point).normalise();
+        vecRefl = vecLight.mirrorAlongNormal(normal);
+
+        Fd = maths::clamp(normal.dot(vecLight) * mat.kd, 0.0f, 1.0f);
+        Fs = maths::clamp(maths::powf(vecRefl.dot(vecEye), mat.exp) * mat.ks, 0.0f, 1.0f);
+        return ((baseColour*Fd) + col4f(Fs));
+    }
+    else if (Type == LIGHT_SPOT)
+    {
+        //TODO
     }
     
     return col4f(0.0f);

@@ -1,4 +1,4 @@
-#include "CSphere.h"
+#include "CSphereSceneObject.h"
 
 namespace raymond
 {
@@ -7,7 +7,7 @@ namespace scene
 
 //ray-sphere intersection test based on a geometric approach
 //TODO: implement a quadratic equation -variant instead?
-bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
+bool CSphereSceneObject::intersect(const ray3f& ray, SIntersection* pIntersect)
 {
     float int0, int1;
     float radiusSquared = maths::square(m_Radius);
@@ -38,24 +38,40 @@ bool CSphere::intersect(const ray3f& ray, SIntersection* pIntersect)
     return true;
 }
 
-CSphere& CSphere::setPosition(const vec3f& p)
+void CSphereSceneObject::setPosition(const vec3f& p)
 {
     m_Center = p;
-    return *this;
 }
 
-const vec3f & CSphere::getPosition()
+const vec3f & CSphereSceneObject::getPosition()
 {
     return m_Center;
 }
 
-CSphere & CSphere::setRadius(float r)
+void CSphereSceneObject::setScale(const vec3f & p)
 {
-    m_Radius = r;
-    return *this;
 }
 
-float CSphere::getRadius()
+const vec3f & CSphereSceneObject::getScale()
+{
+    return vec3f();
+}
+
+void CSphereSceneObject::setRotation(const vec3f & p)
+{
+}
+
+const vec3f & CSphereSceneObject::getRotation()
+{
+    return vec3f();
+}
+
+void CSphereSceneObject::setRadius(float r)
+{
+    m_Radius = r;
+}
+
+float CSphereSceneObject::getRadius()
 {
     return m_Radius;
 }

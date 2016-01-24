@@ -1,7 +1,7 @@
 #include "CSceneLoader.h"
 #include "Log.h"
-
-
+#include "CMesh.h"
+#include "CObjMesh.h"
 
 namespace raymond
 {
@@ -30,6 +30,12 @@ CScene* CSceneLoader::loadXML(const char* path)
         LogError("[SceneLoader] Couldn't find file \"%s\"\n",path);
         return 0;
     }
+
+    //get base path
+    strcpy(basePath, path);
+    char* p = strrchr(basePath, '/');
+    if (p) 
+        *p = 0;
 
     XMLElement* pChild = 0; //used as general child pointer
     XMLElement* pLightsElement = 0;
@@ -186,7 +192,8 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
     return pNewLight;
 }
 
-CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
+
+CSphereSceneObject* CSceneLoader::xmlElemToSphereObject(tinyxml2::XMLElement* pElem)
 {
     XMLElement* pPosElem = pElem->FirstChildElement("position");
     XMLElement* pMatElem = pElem->FirstChildElement("material_solid");
@@ -201,7 +208,7 @@ CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
 
     float radius = xmlElemGetFloatAttrib(pElem, "radius");
 
-    CSphere* pNewSphere = new CSphere();
+    CSphereSceneObject* pNewSphere = new CSphereSceneObject();
     pNewSphere->setPosition(xmlElemToVec(pPosElem));
     pNewSphere->setRadius(radius);
 
@@ -215,17 +222,78 @@ CSphere* CSceneLoader::xmlElemToSphere(tinyxml2::XMLElement* pElem)
     return pNewSphere;
 }
 
+CMeshSceneObject * CSceneLoader::xmlElemToMeshObject(tinyxml2::XMLElement * pElem)
+{
+    const char* name = pElem->Attribute("name");
+    XMLElement* pMatElem = pElem->FirstChildElement("material_solid");
+    if (!pMatElem) pMatElem = pElem->FirstChildElement("material_textured"); //try textured material as well
+
+    if (!name)
+    {
+        LogError("[SceneLoader] Mesh element is missing a name (file path)\n");
+        return 0;
+    }
+    if (!pMatElem)
+    {
+        LogError("[SceneLoader] Mesh element missing a material\n");
+        return 0;
+    }
+
+    sprintf(tmpPath, "%s/%s", basePath, name);
+    CObjMesh* pMesh = new CObjMesh();
+    if (pMesh->load(tmpPath))
+    {
+        LogError("[SceneLoader] Failed loading mesh from '%s'\n", name);
+        delete pMesh;
+        return 0;
+    }
+
+    CMeshSceneObject* pNewMeshObj = new CMeshSceneObject();
+    //TODO: mesh cache
+    pNewMeshObj->setMesh(pMesh);
+
+    if (xmlElemToMaterial(pMatElem, &pNewMeshObj->Material))
+    {
+        LogError("[SceneLoader] Failed loading material for sphere\n");
+        delete pNewMeshObj;
+        return 0;
+    }
+
+    return pNewMeshObj;
+}
+
 CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
 {
+    if (pElem->FirstChildElement("transform"))
+    {
+        LogError("[SceneLoader] Transformations not supported\n");
+    }
+
     if (XMLUtil::StringEqual(pElem->Name(), "sphere"))
     {
-        return xmlElemToSphere(pElem);
+        return xmlElemToSphereObject(pElem);
     }
+    else if (XMLUtil::StringEqual(pElem->Name(), "mesh"))
+    {
+        return xmlElemToMeshObject(pElem);
+    }
+    else
+    {
+        LogError("[SceneLoader] Object type '%s' not supported\n", pElem->Name());
+        return 0;
+    }
+
     return 0;
 }
 
 u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat)
 {
+    if (XMLUtil::StringEqual(pElem->Name(), "material_textured"))
+    {
+        Log("[SceneLoader] Textured materials not supported\n");
+        return 0;
+    }
+
     XMLElement* pColElem = pElem->FirstChildElement("color");
     XMLElement* pPhongElem = pElem->FirstChildElement("phong");
     XMLElement* pReflElem = pElem->FirstChildElement("reflectance");
@@ -255,11 +323,14 @@ u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat
 
 vec3f CSceneLoader::xmlElemToVec(tinyxml2::XMLElement* pElem)
 {
-    //TODO: error checks
     vec3f vec;
-    pElem->QueryFloatAttribute("x", &vec.X);
-    pElem->QueryFloatAttribute("y", &vec.Y);
-    pElem->QueryFloatAttribute("z", &vec.Z);
+    if (pElem->QueryFloatAttribute("x", &vec.X) ||
+        pElem->QueryFloatAttribute("y", &vec.Y) ||
+        pElem->QueryFloatAttribute("z", &vec.Z))
+    {
+        LogError("[SceneLoader] Vector missing component(s)\n");
+    }
+
     return vec;
 }
 
@@ -267,10 +338,13 @@ col4f CSceneLoader::xmlElemToColour(tinyxml2::XMLElement* pElem)
 {
     //TODO: error checks
     col4f col;
-    pElem->QueryFloatAttribute("r", &col.R);
-    pElem->QueryFloatAttribute("g", &col.G);
-    pElem->QueryFloatAttribute("b", &col.B);
     pElem->QueryFloatAttribute("a", &col.A);
+    if (pElem->QueryFloatAttribute("r", &col.R) ||
+        pElem->QueryFloatAttribute("g", &col.G) ||
+        pElem->QueryFloatAttribute("b", &col.B))
+    {
+        LogError("[SceneLoader] Colour missing component(s)\n");
+    }
     return col;
 }
 

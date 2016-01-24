@@ -18,9 +18,9 @@ class col4
 public:
     T R; T G; T B; T A;
 
-    col4(T r = 0, T g = 0, T b = 0, T a = 0) :
-        R(r), G(g), B(b), A(a)
-    {}
+    col4() : R(0), G(0), B(0), A(0) {}
+    col4(T c) : R(c), G(c), B(c), A(0) {}
+    col4(T r, T g, T b, T a = 0) : R(r), G(g), B(b), A(a) {}
 
     col4(const col4<T>& o)
     {
@@ -141,7 +141,7 @@ public:
 
     col4<T> operator/(const T& n) const
     {
-        if (maths::equals(n, n)) return *this;
+        if (maths::equals(n, 0)) return *this;
         return col4<T>(R / n, G / n, B / n, A / n);
     }
 

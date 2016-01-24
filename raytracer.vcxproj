@@ -99,16 +99,21 @@
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CLight.cpp" />
+    <ClCompile Include="CMeshSceneObject.cpp" />
+    <ClCompile Include="CObjMesh.cpp" />
     <ClCompile Include="CPPMImageWriter.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneLoader.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="raytracer.cpp" />
-    <ClCompile Include="CSphere.cpp" />
+    <ClCompile Include="CSphereSceneObject.cpp" />
     <ClCompile Include="tinyxml2\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CMesh.h" />
+    <ClInclude Include="CMeshSceneObject.h" />
+    <ClInclude Include="CObjMesh.h" />
     <ClInclude Include="col4.h" />
     <ClInclude Include="CLight.h" />
     <ClInclude Include="CSceneLoader.h" />
@@ -120,8 +125,9 @@
     <ClInclude Include="ray3.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneObject.h" />
-    <ClInclude Include="CSphere.h" />
+    <ClInclude Include="CSphereSceneObject.h" />
     <ClInclude Include="tinyxml2\tinyxml2.h" />
+    <ClInclude Include="triangle3.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="vec3.h" />
