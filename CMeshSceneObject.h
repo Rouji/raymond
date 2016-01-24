@@ -5,6 +5,7 @@
 #include "ray3.h"
 #include "CSceneObject.h"
 #include "CMesh.h"
+#include <vector>
 
 namespace raymond
 {
@@ -32,6 +33,11 @@ public:
 
 private:
     CMesh* m_pMesh;
+
+    //TODO: this is kind of a hack
+    std::vector<triangle3f> m_faces;
+    std::vector<vec3f> m_normals;
+
     vec3f m_pos;
 };
 
