@@ -23,10 +23,16 @@ public:
 
     bool intersect(const ray3f& ray, SIntersection* pIntersect);
 
-    CSphereSceneObject& setPosition(const vec3f& p);
+    void setPosition(const vec3f& p);
     const vec3f& getPosition();
 
-    CSphereSceneObject& setRadius(float r);
+    void setScale(const vec3f& p);
+    const vec3f& getScale();
+
+    void setRotation(const vec3f& p);
+    const vec3f& getRotation();
+
+    void setRadius(float r);
     float getRadius();
 
 private:

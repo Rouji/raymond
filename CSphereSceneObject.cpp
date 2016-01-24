@@ -38,10 +38,9 @@ bool CSphereSceneObject::intersect(const ray3f& ray, SIntersection* pIntersect)
     return true;
 }
 
-CSphereSceneObject& CSphereSceneObject::setPosition(const vec3f& p)
+void CSphereSceneObject::setPosition(const vec3f& p)
 {
     m_Center = p;
-    return *this;
 }
 
 const vec3f & CSphereSceneObject::getPosition()
@@ -49,10 +48,27 @@ const vec3f & CSphereSceneObject::getPosition()
     return m_Center;
 }
 
-CSphereSceneObject & CSphereSceneObject::setRadius(float r)
+void CSphereSceneObject::setScale(const vec3f & p)
+{
+}
+
+const vec3f & CSphereSceneObject::getScale()
+{
+    return vec3f();
+}
+
+void CSphereSceneObject::setRotation(const vec3f & p)
+{
+}
+
+const vec3f & CSphereSceneObject::getRotation()
+{
+    return vec3f();
+}
+
+void CSphereSceneObject::setRadius(float r)
 {
     m_Radius = r;
-    return *this;
 }
 
 float CSphereSceneObject::getRadius()
