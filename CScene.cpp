@@ -9,7 +9,7 @@ namespace scene
 {
 
 //distance to add between a surface and ray cast from it
-const f32 RECAST_MARGIN = FLOAT_ROUNDING_ERROR_32 * 5.0f; 
+const f32 RECAST_MARGIN = FLOAT_ROUNDING_ERROR_32 * 10.0f; 
 
 CScene::CScene() :
     m_pCamera(0),
