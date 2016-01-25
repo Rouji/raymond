@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE scene SYSTEM "scene.dtd">
 
-<scene output_file="example4.png">
+<scene output_file="example4_mod.png">
 	<background_color r="0.0" g="0.0" b="0.0"/>
 	<camera>
 		<position x="0.0" y="2.0" z="1.0"/>
