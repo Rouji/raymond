@@ -32,6 +32,10 @@ private:
     col4f xmlElemToColour(tinyxml2::XMLElement* pElem);
     f32 xmlElemGetFloatAttrib(tinyxml2::XMLElement* pElem, const char* attrName);
     s32 xmlElemGetIntAttrib(tinyxml2::XMLElement* pElem, const char* attrName);
+
+
+    char basePath[1024];
+    char tmpPath[1024];
 };
 
 } //scene

@@ -3,8 +3,6 @@
 #include "CMesh.h"
 #include "CObjMesh.h"
 
-
-
 namespace raymond
 {
 namespace scene
@@ -32,6 +30,12 @@ CScene* CSceneLoader::loadXML(const char* path)
         LogError("[SceneLoader] Couldn't find file \"%s\"\n",path);
         return 0;
     }
+
+    //get base path
+    memcpy(basePath, path, strlen(path)+1);
+    char* p = strrchr(basePath, '/');
+    if (p) 
+        p[0] = 0;
 
     XMLElement* pChild = 0; //used as general child pointer
     XMLElement* pLightsElement = 0;
@@ -235,8 +239,9 @@ CMeshSceneObject * CSceneLoader::xmlElemToMeshObject(tinyxml2::XMLElement * pEle
         return 0;
     }
 
+    sprintf(tmpPath, "%s/%s", basePath, name);
     CObjMesh* pMesh = new CObjMesh();
-    if (pMesh->load(name))
+    if (pMesh->load(tmpPath))
     {
         LogError("[SceneLoader] Failed loading mesh from '%s'\n", name);
         delete pMesh;
