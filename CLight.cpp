@@ -42,8 +42,7 @@ col4f CLight::shade(const vec3f& point, const vec3f& normal, const vec3f& eye, c
 
         Fd = maths::clamp(normal.dot(vecLight) * mat.kd, 0.0f, 1.0f);
         Fs = maths::clamp(maths::powf(vecRefl.dot(vecEye), mat.exp) * mat.ks, 0.0f, 1.0f);
-        col4f c = ((baseColour*Fd) + col4f(Fs));
-        return c;
+        return ((baseColour*Fd) + col4f(Fs));
     }
     else if (Type == LIGHT_SPOT)
     {
