@@ -188,6 +188,7 @@ CLight * CSceneLoader::xmlElemToLight(tinyxml2::XMLElement * pElem)
     return pNewLight;
 }
 
+
 CSphereSceneObject* CSceneLoader::xmlElemToSphereObject(tinyxml2::XMLElement* pElem)
 {
     XMLElement* pPosElem = pElem->FirstChildElement("position");
@@ -243,7 +244,6 @@ CMeshSceneObject * CSceneLoader::xmlElemToMeshObject(tinyxml2::XMLElement * pEle
     }
 
     CMeshSceneObject* pNewMeshObj = new CMeshSceneObject();
-    //TODO: position etc.
     //TODO: mesh cache
     pNewMeshObj->setMesh(pMesh);
 
@@ -267,6 +267,17 @@ CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
     {
         return xmlElemToMeshObject(pElem);
     }
+    else
+    {
+        LogError("[SceneLoader] Object type '%s' not supported\n", pElem->Name());
+        return 0;
+    }
+
+    if (pElem->FirstChildElement("transform"))
+    {
+        LogError("[SceneLoader] Transformations not supported\n");
+    }
+
     return 0;
 }
 
@@ -307,11 +318,14 @@ u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat
 
 vec3f CSceneLoader::xmlElemToVec(tinyxml2::XMLElement* pElem)
 {
-    //TODO: error checks
     vec3f vec;
-    pElem->QueryFloatAttribute("x", &vec.X);
-    pElem->QueryFloatAttribute("y", &vec.Y);
-    pElem->QueryFloatAttribute("z", &vec.Z);
+    if (pElem->QueryFloatAttribute("x", &vec.X) ||
+        pElem->QueryFloatAttribute("y", &vec.Y) ||
+        pElem->QueryFloatAttribute("z", &vec.Z))
+    {
+        LogError("[SceneLoader] Vector missing component(s)\n");
+    }
+
     return vec;
 }
 
@@ -319,10 +333,13 @@ col4f CSceneLoader::xmlElemToColour(tinyxml2::XMLElement* pElem)
 {
     //TODO: error checks
     col4f col;
-    pElem->QueryFloatAttribute("r", &col.R);
-    pElem->QueryFloatAttribute("g", &col.G);
-    pElem->QueryFloatAttribute("b", &col.B);
     pElem->QueryFloatAttribute("a", &col.A);
+    if (pElem->QueryFloatAttribute("r", &col.R) ||
+        pElem->QueryFloatAttribute("g", &col.G) ||
+        pElem->QueryFloatAttribute("b", &col.B))
+    {
+        LogError("[SceneLoader] Colour missing component(s)\n");
+    }
     return col;
 }
 
