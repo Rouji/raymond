@@ -259,6 +259,11 @@ CMeshSceneObject * CSceneLoader::xmlElemToMeshObject(tinyxml2::XMLElement * pEle
 
 CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
 {
+    if (pElem->FirstChildElement("transform"))
+    {
+        LogError("[SceneLoader] Transformations not supported\n");
+    }
+
     if (XMLUtil::StringEqual(pElem->Name(), "sphere"))
     {
         return xmlElemToSphereObject(pElem);
@@ -273,11 +278,6 @@ CSceneObject * CSceneLoader::xmlElemToSceneObject(tinyxml2::XMLElement * pElem)
         return 0;
     }
 
-    if (pElem->FirstChildElement("transform"))
-    {
-        LogError("[SceneLoader] Transformations not supported\n");
-    }
-
     return 0;
 }
 
@@ -285,7 +285,7 @@ u32 CSceneLoader::xmlElemToMaterial(tinyxml2::XMLElement* pElem, SMaterial* pMat
 {
     if (XMLUtil::StringEqual(pElem->Name(), "material_textured"))
     {
-        Log("[SceneLoader] Textured materials not yet supported\n");
+        Log("[SceneLoader] Textured materials not supported\n");
         return 0;
     }
 
